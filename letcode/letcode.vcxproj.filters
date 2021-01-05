@@ -45,9 +45,6 @@
     <ClCompile Include="88_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="143_Medium.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\188_Hard.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -61,6 +58,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\830_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="134_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="1_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

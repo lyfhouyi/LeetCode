@@ -20,7 +20,8 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-int canCompleteCircuit(vector<int>& gas, vector<int>& cost) 
+//双指针遍历。beginGas 记录试探出发的位置，stopGas 记录当前试探可以到达的位置。当前试探失败后，下次试探的出发位置为这次试探失败的位置（即 beginGas_n+1 = stopGas_n ）；如此，当 beginGas 返回到第一次试探的位置时，判定为无法绕行一周。时间复杂度 O(1) ，只需遍历数组一次。
+int canCompleteCircuit(vector<int>& gas, vector<int>& cost)
 {
 	vector<int>::iterator stopGas = gas.begin();
 	vector<int>::iterator stopCost = cost.begin();
@@ -34,15 +35,15 @@ int canCompleteCircuit(vector<int>& gas, vector<int>& cost)
 		beginGas = stopGas;
 		beginCost = stopCost;
 		net = 0;
+		bool flagi = false;
 		while (net >= 0)
 		{
-			bool flagi = false;
-			net = net + *stopGas - *stopCost;
+			net = net + *stopGas - *stopCost; // net 保存的是刚到达 stopGas 加油站时油箱的剩余油量（尚未在 stopGas 加油时）
 			stopGas++;
 			stopCost++;
 			if (stopGas == gas.end())
 			{
-				if (flagi&&(beginGas == gas.end() - 1))
+				if (flagi && (beginGas == gas.end() - 1)) //防止试探的出发 beginGas 在数组最后一个元素时，stopGas > beginGas 永远不会成立的死循环
 				{
 					return beginGas - gas.begin();
 				}
@@ -51,10 +52,10 @@ int canCompleteCircuit(vector<int>& gas, vector<int>& cost)
 				stopGas = gas.begin();
 				stopCost = cost.begin();
 			}
-			if ((flag==true)&&((stopGas > beginGas)))
+			if (flagi && (stopGas > beginGas))
 				return beginGas - gas.begin();
 		}
-		stopSpan += flag?(stopGas - beginGas+ gas.size()):(stopGas - beginGas);
+		stopSpan += flag ? (stopGas - beginGas + gas.size()) : (stopGas - beginGas);
 		if (stopSpan > gas.size())
 			return -1;
 	}
@@ -63,8 +64,8 @@ int canCompleteCircuit(vector<int>& gas, vector<int>& cost)
 
 int main()
 {
-	vector<int> test1 = {5,1,2,3,4 };
-	vector<int> test2 = {4,4,1,5,1};
+	vector<int> test1 = { 5,1,2,3,4 };
+	vector<int> test2 = { 4,4,1,5,1 };
 	int ret = canCompleteCircuit(test1, test2);
 	cout << "main：ret = " << ret << endl;
 	return 0;
