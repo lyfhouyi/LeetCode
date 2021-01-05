@@ -134,6 +134,11 @@
     <ClCompile Include="605_Easy.cpp" />
     <ClCompile Include="86_Medium.cpp" />
     <ClCompile Include="88_Easy.cpp" />
+    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\188_Hard.cpp" />
+    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\330_Hard.cpp" />
+    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\509_Easy.cpp" />
+    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\665_Easy.cpp" />
+    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\830_Easy.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
