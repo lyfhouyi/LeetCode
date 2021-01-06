@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<map>
 
 using namespace std;
 
@@ -31,19 +32,68 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-
-vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) 
+class Vertex
 {
-	return values;
+public:
+	Vertex(string name) :name(name), outEdges(map<Vertex*, double>()) {}
+	string name;
+	map<Vertex*, double>outEdges; //出边集（pair<目标顶点（作为分子），边值（作为比值）>）
+	void addOutEdge(Vertex* outVertex, double value) //增加一条出边
+	{
+		if (outEdges.end() != outEdges.find(outVertex))
+			return;
+		cout << "addOutEdge：增加一条边：" << this->name << "->" << outVertex->name << "  ( " << this->name << " / " << outVertex->name << " ) = " << value << endl;
+		outEdges[outVertex] = value;
+		outVertex->addOutEdge(this, 1 / value);
+
+		//增加相关边：已知，增加，=>推出；增加中加括号的项是 this
+		for (map<Vertex*, double>::iterator it = outVertex->outEdges.begin(); it != outVertex->outEdges.end(); it++) //b->c,(a)->b,=>a->c
+			this->addOutEdge(it->first, (outEdges.at(outVertex))*(it->second));
+	}
+};
+
+
+
+
+
+vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries)
+{
+	map<string, Vertex*>vertexs; //顶点集
+	vector<double> result;
+	//构造关系图
+	for (int i = 0; i < equations.size(); i++)
+	{
+		if (vertexs.end() == vertexs.find(equations[i][0]))
+			vertexs[equations[i][0]] = new Vertex(equations[i][0]);
+		if (vertexs.end() == vertexs.find(equations[i][1]))
+			vertexs[equations[i][1]] = new Vertex(equations[i][1]);
+		vertexs.at(equations[i][0])->addOutEdge(vertexs.at(equations[i][1]), values[i]);
+	}
+
+
+	//查询关系图
+	for (int i = 0; i < queries.size(); i++)
+	{
+		if (vertexs.end() == vertexs.find(queries[i][0]) || vertexs.end() == vertexs.find(queries[i][1]))
+			result.push_back(-1);
+		else
+		{
+			if (vertexs.at(queries[i][0])->outEdges.end() == vertexs.at(queries[i][0])->outEdges.find(vertexs.at(queries[i][1])))
+				result.push_back(-1);
+			else
+				result.push_back(vertexs.at(queries[i][0])->outEdges.at(vertexs.at(queries[i][1])));
+		}
+	}
+	return result;
 }
 
-
-
+//构造关系图的时间复杂度 O(n^2)=1lg1+2lg2+xlgx+mlgm
+//查询关系图的时间复杂度 O(nlgm)
 int main()
 {
-	vector<vector<string>> equations = { {"a","b"},{"b","c"} ,{"bc","cd"} };
-	vector<double> values = { 1.5, 2.5, 5.0 };
-	vector<vector<string>> queries = { {"a","c"},{"c","b"} ,{"bc","cd"}, {"cd","bc"} };
+	vector<vector<string>> equations = { {"a","b"},{"c","d"} };
+	vector<double> values = { 1,1 };
+	vector<vector<string>> queries = { {"a","c"},{"b","d"} ,{"b","a"}, {"d","c"} };
 	vector<double> ret = calcEquation(equations, values, queries);
 	cout << "main：ret = [";
 	for (vector<double>::iterator it = ret.begin(); it != ret.end(); it++)
