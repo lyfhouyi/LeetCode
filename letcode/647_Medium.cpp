@@ -95,7 +95,7 @@ int countSubstrings(string s)
 }
 
 
-int main()
+int main647()
 {
 	string test = "dfghjkl";
 	int ret = countSubstrings(test);
