@@ -44,16 +44,13 @@ public:
 			return;
 		cout << "addOutEdge：增加一条边：" << this->name << "->" << outVertex->name << "  ( " << this->name << " / " << outVertex->name << " ) = " << value << endl;
 		outEdges[outVertex] = value;
-		outVertex->addOutEdge(this, 1 / value);
+		outVertex->addOutEdge(this, 1 / value); //增加反方向的出边
 
-		//增加相关边：已知，增加，=>推出；增加中加括号的项是 this
-		for (map<Vertex*, double>::iterator it = outVertex->outEdges.begin(); it != outVertex->outEdges.end(); it++) //b->c,(a)->b,=>a->c
+		//增加相关边
+		for (map<Vertex*, double>::iterator it = outVertex->outEdges.begin(); it != outVertex->outEdges.end(); it++)
 			this->addOutEdge(it->first, (outEdges.at(outVertex))*(it->second));
 	}
 };
-
-
-
 
 
 vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries)
@@ -69,7 +66,6 @@ vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& v
 			vertexs[equations[i][1]] = new Vertex(equations[i][1]);
 		vertexs.at(equations[i][0])->addOutEdge(vertexs.at(equations[i][1]), values[i]);
 	}
-
 
 	//查询关系图
 	for (int i = 0; i < queries.size(); i++)
