@@ -48,7 +48,7 @@ vector<vector<int>> largeGroupPositions(string s)
 	return largeGroups;
 }
 
-int main()
+int main830()
 {
 	string test = "abcdddeeeeaabbbcd";
 	vector<vector<int>> ret= largeGroupPositions(test);
