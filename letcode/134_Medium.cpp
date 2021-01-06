@@ -62,7 +62,7 @@ int canCompleteCircuit(vector<int>& gas, vector<int>& cost)
 }
 
 
-int main()
+int main134()
 {
 	vector<int> test1 = { 5,1,2,3,4 };
 	vector<int> test2 = { 4,4,1,5,1 };

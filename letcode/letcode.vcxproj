@@ -23,6 +23,7 @@
     <ProjectGuid>{4AF894D3-2A8E-47CA-B782-EBD7A631D768}</ProjectGuid>
     <RootNamespace>letcode</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>LeetCode</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -125,21 +126,22 @@
   <ItemGroup>
     <ClCompile Include="1046_Easy.cpp" />
     <ClCompile Include="134_Medium.cpp" />
+    <ClCompile Include="188_Hard.cpp" />
     <ClCompile Include="1_Easy.cpp" />
     <ClCompile Include="239_Hard.cpp" />
     <ClCompile Include="2_Medium.cpp" />
+    <ClCompile Include="330_Hard.cpp" />
     <ClCompile Include="3_Medium.cpp" />
     <ClCompile Include="435_Medium.cpp" />
     <ClCompile Include="4_Hard.cpp" />
+    <ClCompile Include="509_Easy.cpp" />
     <ClCompile Include="50_Medium.cpp" />
     <ClCompile Include="605_Easy.cpp" />
+    <ClCompile Include="647_Medium.cpp" />
+    <ClCompile Include="665_Easy.cpp" />
+    <ClCompile Include="830_Easy.cpp" />
     <ClCompile Include="86_Medium.cpp" />
     <ClCompile Include="88_Easy.cpp" />
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\188_Hard.cpp" />
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\330_Hard.cpp" />
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\509_Easy.cpp" />
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\665_Easy.cpp" />
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\830_Easy.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

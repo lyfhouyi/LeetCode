@@ -45,25 +45,28 @@
     <ClCompile Include="88_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\188_Hard.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\330_Hard.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\509_Easy.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\665_Easy.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\myCode\test\cxx\letCode\letCode\830_Easy.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="134_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="1_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="647_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="188_Hard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="330_Hard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="509_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="665_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="830_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
