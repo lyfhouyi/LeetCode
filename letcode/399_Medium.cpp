@@ -84,9 +84,9 @@ vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& v
 	return result;
 }
 
-//构造关系图的时间复杂度 O(n^2)=1lg1+2lg2+xlgx+mlgm
-//查询关系图的时间复杂度 O(nlgm)
-int main()
+
+
+int main399()
 {
 	vector<vector<string>> equations = { {"a","b"},{"c","d"} };
 	vector<double> values = { 1,1 };
