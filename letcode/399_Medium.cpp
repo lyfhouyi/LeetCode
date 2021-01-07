@@ -53,6 +53,7 @@ public:
 };
 
 
+//带权有向图。将变量设为顶点，变量间的比值关系设为边，有向边的出顶点设为分子，入顶点设为分母。首先遍历 equations 数组构造关系图，每插入一个顶点都要确定该顶点的所有有向边；查询时遍历 queries 数组，两查询变量（顶点）间的有向边即是查询结果。
 vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries)
 {
 	map<string, Vertex*>vertexs; //顶点集
