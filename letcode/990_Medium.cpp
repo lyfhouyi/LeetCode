@@ -72,9 +72,9 @@ bool equationsPossible(vector<string>& equations)
 }
 
 
-int main()
+int main990()
 {
-	vector<string> test = { "a==c","b==d","x!=x"};
+	vector<string> test = { "a==c","b==d","x!=x" };
 	bool ret = equationsPossible(test);
 	cout << "main：ret = " << ret << endl;
 	return 0;
