@@ -70,7 +70,7 @@ string longestPalindrome(string s)
 }
 
 
-int main()
+int main5()
 {
 	string test = "abba";
 	string ret = longestPalindrome(test);
