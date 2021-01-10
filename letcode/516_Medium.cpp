@@ -19,9 +19,9 @@ using namespace std;
 
 
 //动态规划。计算一个数组：dp[i][j] 表示子串 [i,j] 上的最长回文子序列的长度。
-//状态转移函数：j != i + 1 时，s[i] == s[j] 时，dp[j][i] = dp[j - 1][i + 1] + 2 ，s[i] != s[j] 时，dp[j][i] = max(dp[j - 1][i], dp[j][i + 1])；j == i + 1 时，dp[i][j] = s[i] == s[j] ? 2 : 1 。
+//状态转移函数：j != i + 1 时，s[i] == s[j] 时，dp[i][j] = dp[i + 1][j - 1] + 2 ，s[i] != s[j] 时，dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])；j == i + 1 时，dp[i][j] = s[i] == s[j] ? 2 : 1 。
 //边界条件：dp[i][i] = 1
-//最优解：dp[n-1][0] 的值
+//最优解：dp[0][n-1] 的值
 int longestPalindromeSubseq(string s)
 {
 	int n = s.size();
