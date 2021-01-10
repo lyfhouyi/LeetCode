@@ -28,6 +28,7 @@ using namespace std;
 //状态转移函数：若在下标第 i 天买入，则 buy[i][j] = sell[i-1][j] - prices[i]；若在下标第 i 天不买入，则 buy[i][j] = buy[i-1][j] ，则 buy[i][j] = max(sell[i-1][j] - prices[i] , buy[i-1][j])。
 //				若在下标第 i 天卖出，则 sell[i][j] = buy[i-1][j-1] + prices[i]；若在下标第 i 天不卖出，则 sell[i][j] = sell[i-1][j] ，则 sell[i][j] = max(buy[i-1][j-1] + prices[i] , sell[i-1][j])。
 //边界条件：sell[0][:] = 0，sell[:][0] = 0；buy[0][0] = -prices[0]，buy[0][1:] = INT_MIN。
+//最优解：sell[n - 1][:] 的最大值
 int maxProfit(vector<int>& prices)
 {
 	int n = prices.size();
@@ -45,7 +46,7 @@ int maxProfit(vector<int>& prices)
 		sell[0][i] = 0;
 	}
 
-	//计算 buy 数组、sell 数组。下标第 i 天操作后，最大只能有 min((i+1)/2+1,k+1) 次交易
+	//计算 buy 数组、sell 数组。下标第 i 天操作后，最大只能有 min((i+1)/2+1,k+1) 次交易，行优先遍历
 	for (int i = 1; i < n; i++)
 	{
 		for (int j = 0; j < min((i + 1) / 2 + 1, k + 1); j++)
