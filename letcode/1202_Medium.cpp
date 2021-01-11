@@ -37,6 +37,7 @@ public:
 	set<Vertex*> connectivityVertex; //连接顶点集
 	void addEdge(Vertex* connectVertex) //增加一条边
 	{
+		cout << "addEdge：增加一条边：  " << this->no << "-->" << connectVertex->no << endl;
 		pair<set<Vertex*>::iterator, bool>result = connectivityVertex.insert(connectVertex);
 		if (false == result.second)
 			return;
@@ -44,15 +45,32 @@ public:
 		//	minCharIndex = connectVertex->no;
 		connectivityVertex.insert(connectVertex);
 		if (nullptr == candidateQueue)
+		{
 			candidateQueue = new priority_queue<char>;
-		connectVertex->candidateQueue = this->candidateQueue;
+			cout << "addEdge：新建一个可交换字符优先级队列：" << candidateQueue << endl;
+		}
+		if(nullptr == connectVertex->candidateQueue || this->candidateQueue == connectVertex->candidateQueue)
+			connectVertex->candidateQueue = this->candidateQueue;
+		else //合并两个优先级队列
+		{
+			cout << "addEdge：合并可交换字符优先级队列：" << connectVertex->candidateQueue << "-->" << this->candidateQueue << endl;
+			while (!connectVertex->candidateQueue->empty())
+			{
+				this->candidateQueue->push(connectVertex->candidateQueue->top());
+				connectVertex->candidateQueue->pop();
+			}
+			if (connectVertex->candidateQueue == nullptr)
+				cout << "sdf";
+			delete connectVertex->candidateQueue;
+			connectVertex->candidateQueue = this->candidateQueue;
+		}
 		if (!isInQueue)
 		{
-			cout << "addEdge：  " << s[this->no] << "  字符已加入可交换字符优先级队列" << endl;
+			cout << "addEdge：  " << s[this->no] << "  已加入可交换字符优先级队列  " << candidateQueue << endl;
 			candidateQueue->push(s[this->no]);
 			isInQueue = true;
 		}
-		connectVertex->addEdge(this);
+		//connectVertex->addEdge(this);
 		for (set<Vertex*>::iterator it = connectVertex->connectivityVertex.begin(); it != connectVertex->connectivityVertex.end(); it++)
 			this->addEdge(*it);
 	}
@@ -100,7 +118,7 @@ string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 }
 
 
-int main()
+int main1234()
 {
 	string test = "dcab";
 	vector<vector<int>> pairs = { {3,0},{1,2},{0,2}  };

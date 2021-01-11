@@ -41,7 +41,7 @@ public:
 		pair<set<Vertex*>::iterator, bool> ret = connectivityVertex.insert(connectVertex);
 		if (false == ret.second)
 			return;
-		//cout << "addEdge：增加一条边：" << this->no << "--" << connectVertex->no << endl;
+		cout << "addEdge：增加一条边：" << this->no << "--" << connectVertex->no << endl;
 		connectVertex->addEdge(this); //增加反方向的边
 
 		//增加相关边
@@ -53,45 +53,45 @@ public:
 
 
 //解法一：无向图。将城市设为顶点，城市间的连通关系设为边。首先构造城市集，随后遍历 isConnected 数组，构造关系图，每插入一条边都要确定该顶点的所有边；顶点的度反映了与该城市连通的城市的数量，通过构造城市数量数组计算省份数量。
-//int findCircleNum(vector<vector<int>>& isConnected) 
-//{
-//	map<int, Vertex*>vertexs; //顶点集
-//	int size = isConnected.size(); //城市总数
-//	int i;
-//
-//	//构造顶点集
-//	for (i = 0; i < size; i++)
-//	{
-//		if (vertexs.end() == vertexs.find(i))
-//			vertexs[i] = new Vertex(i);
-//	}
-//
-//	//构造关系图
-//	for (i = 0; i < size; i++)
-//	{
-//		for (int j = 0; j < size; j++)
-//		{
-//			if (1 == isConnected[i][j])
-//				vertexs[i]->addEdge(vertexs[j]);
-//		}
-//	}
-//
-//	//计算省份数量
-//	vector<int>cityCnt(size); //保存每一个城市所在的省份的城市数量
-//	int provinceCnt = 0;
-//	for (i=0;i<size;i++)
-//	{
-//		cout << vertexs[i]->degree << "  ";
-//		cityCnt[i]= vertexs[i]->degree;
-//	}
-//	sort(cityCnt.begin(), cityCnt.end());
-//	for (i = 0; i < size; )
-//	{
-//		provinceCnt++;
-//		i += cityCnt[i];
-//	}
-//	return provinceCnt;
-//}
+int findCircleNum(vector<vector<int>>& isConnected) 
+{
+	map<int, Vertex*>vertexs; //顶点集
+	int size = isConnected.size(); //城市总数
+	int i;
+
+	//构造顶点集
+	for (i = 0; i < size; i++)
+	{
+		if (vertexs.end() == vertexs.find(i))
+			vertexs[i] = new Vertex(i);
+	}
+
+	//构造关系图
+	for (i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (1 == isConnected[i][j])
+				vertexs[i]->addEdge(vertexs[j]);
+		}
+	}
+
+	//计算省份数量
+	vector<int>cityCnt(size); //保存每一个城市所在的省份的城市数量
+	int provinceCnt = 0;
+	for (i=0;i<size;i++)
+	{
+		cout << vertexs[i]->degree << "  ";
+		cityCnt[i]= vertexs[i]->degree;
+	}
+	sort(cityCnt.begin(), cityCnt.end());
+	for (i = 0; i < size; )
+	{
+		provinceCnt++;
+		i += cityCnt[i];
+	}
+	return provinceCnt;
+}
 
 
 void dfs(const vector<vector<int>>& isConnected, vector<bool>& isVisited, int startIndex)
@@ -122,39 +122,39 @@ void dfs(const vector<vector<int>>& isConnected, vector<bool>& isVisited, int st
 
 
 //解法三：广度优先搜索
-int findCircleNum(vector<vector<int>>& isConnected)
-{
-	int provinceCnt = 0;
-	int size = isConnected.size();
-	int currentVisit;
-	int j;
-	vector<bool> isVisited(size, false);
-	queue<int>visitList;
-	for (int i = 0; i < size; i++)
-	{
-		if (true == isVisited[i])
-			continue;
-		provinceCnt++;
-		visitList.push(i);
-		while (!visitList.empty())
-		{
-			currentVisit = visitList.front();
-			visitList.pop();
-			isVisited[currentVisit] = true;
-			for (j = 0; j < size; j++)
-			{
-				if (1 == isConnected[currentVisit][j] && false == isVisited[j])
-					visitList.push(j);
-			}
-		}
-	}
-	return provinceCnt;
-}
+//int findCircleNum(vector<vector<int>>& isConnected)
+//{
+//	int provinceCnt = 0;
+//	int size = isConnected.size();
+//	int currentVisit;
+//	int j;
+//	vector<bool> isVisited(size, false);
+//	queue<int>visitList;
+//	for (int i = 0; i < size; i++)
+//	{
+//		if (true == isVisited[i])
+//			continue;
+//		provinceCnt++;
+//		visitList.push(i);
+//		while (!visitList.empty())
+//		{
+//			currentVisit = visitList.front();
+//			visitList.pop();
+//			isVisited[currentVisit] = true;
+//			for (j = 0; j < size; j++)
+//			{
+//				if (1 == isConnected[currentVisit][j] && false == isVisited[j])
+//					visitList.push(j);
+//			}
+//		}
+//	}
+//	return provinceCnt;
+//}
 
-int main547()
+int main()
 {
-	//vector<vector<int>> test{ {1, 0, 0, 1},{0, 1, 1, 0},{0, 1, 1,1},{1, 0, 1, 1} };
-	vector<vector<int>> test{ {1, 0, 0},{0, 1, 0},{0, 0, 1} };
+	vector<vector<int>> test{ {1, 0, 0, 1},{0, 1, 1, 0},{0, 1, 1,1},{1, 0, 1, 1} };
+	//vector<vector<int>> test{ {1, 0, 0},{0, 1, 0},{0, 0, 1} };
 	int ret = findCircleNum(test);
 	cout << "main：ret = " << ret << endl;
 	return 0;
