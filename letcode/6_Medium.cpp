@@ -29,7 +29,7 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-//单指针遍历。
+//单指针遍历。遍历原始字符串时构造每行的字符串，最后连接各行字符串，形成输出字符串。
 string convert(string s, int numRows) 
 {
 	numRows = numRows < s.size() ? numRows : s.size();
