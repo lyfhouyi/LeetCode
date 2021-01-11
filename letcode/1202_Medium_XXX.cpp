@@ -146,7 +146,7 @@ void dfs(const vector<vector<int>>& isConnected, vector<int>& candidateQueueNo, 
 }
 
 
-//深度优先搜索
+//深度优先搜索，基于优先级队列
 //算法正确，但时间超时。
 string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 {
