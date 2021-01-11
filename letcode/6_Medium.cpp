@@ -60,7 +60,7 @@ string convert(string s, int numRows)
 }
 
 
-int main()
+int main6()
 {
 	string test = "P";
 	string ret = convert(test, 12);
