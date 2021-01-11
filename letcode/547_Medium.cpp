@@ -32,7 +32,7 @@ using namespace std;
 class Vertex
 {
 public:
-	Vertex(int no) :no(no), degree(0), connectivityVertex(set<Vertex*>()) {}
+	Vertex(int no) :no(no), degree(0), connectivityVertex(set<Vertex*>()) {} //初始化时，顶点和自己是不连通的
 	int no;
 	int degree;
 	set<Vertex*>connectivityVertex; //连接顶点集
@@ -151,7 +151,7 @@ void dfs(const vector<vector<int>>& isConnected, vector<bool>& isVisited, int st
 //	return provinceCnt;
 //}
 
-int main()
+int main547()
 {
 	vector<vector<int>> test{ {1, 0, 0, 1},{0, 1, 1, 0},{0, 1, 1,1},{1, 0, 1, 1} };
 	//vector<vector<int>> test{ {1, 0, 0},{0, 1, 0},{0, 0, 1} };

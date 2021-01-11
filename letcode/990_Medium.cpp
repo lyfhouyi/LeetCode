@@ -26,7 +26,7 @@ using namespace std;
 class Vertex
 {
 public:
-	Vertex(char name) :name(name), degree(0), connectivityVertex(set<Vertex*>()) { this->addEdge(this); } //顶点和自己是连通的
+	Vertex(char name) :name(name), degree(0), connectivityVertex(set<Vertex*>()) { this->addEdge(this); } //初始化时，顶点和自己是连通的
 	char name;
 	int degree;
 	set<Vertex*>connectivityVertex; //连接顶点集
