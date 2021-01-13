@@ -134,59 +134,185 @@ public:
 
 
 
-
-void dfs(const vector<vector<int>>& isConnected, vector<int>& candidateQueueNo, int startIndex,int queueNo,vector<priority_queue<char, vector<char>, greater<char>>*>& candidateQueues, string& s)
-{
-	candidateQueueNo[startIndex] = queueNo;
-	candidateQueues[queueNo - 1]->push(s[startIndex]);
-	int size = isConnected.size();
-	for (int i = 0; i < size; i++)
-		if (1 == isConnected[startIndex][i] && 0 == candidateQueueNo[i])
-			dfs(isConnected, candidateQueueNo, i, queueNo, candidateQueues,s);
-}
+//深度优先搜索，基于优先级队列
+//void dfs(const vector<vector<int>>& isConnected, vector<int>& candidateQueueNo, int startIndex,int queueNo,vector<priority_queue<char, vector<char>, greater<char>>*>& candidateQueues, string& s)
+//{
+//	candidateQueueNo[startIndex] = queueNo;
+//	candidateQueues[queueNo - 1]->push(s[startIndex]);
+//	int size = isConnected.size();
+//	for (int i = 0; i < size; i++)
+//		if (1 == isConnected[startIndex][i] && 0 == candidateQueueNo[i])
+//			dfs(isConnected, candidateQueueNo, i, queueNo, candidateQueues,s);
+//}
 
 
 //深度优先搜索，基于优先级队列
 //算法正确，但时间超时。
+//string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
+//{
+//	int n = s.length();
+//	vector<vector<int>> isConnected(n, vector<int>(n, 0)); //连接矩阵
+//	
+//	//构造连接矩阵
+//	for (vector<vector<int>>::iterator it = pairs.begin(); it != pairs.end(); it++)
+//	{
+//		isConnected[it->at(0)][it->at(1)] = 1;
+//		isConnected[it->at(1)][it->at(0)] = 1;
+//	}
+//
+//	vector<int> candidateQueueNo(n, 0); //长度与原始字符串相同，指出原始字符串的每一个位置属于哪一个连通域，每个连通域对应一个优先级队列
+//	vector<priority_queue<char, vector<char>, greater<char>>*> candidateQueues; //存储各个优先级队列，索引 = 该优先级队列的编号 - 1 。
+//	int queueNo = 0; //优先级队列编号
+//	
+//	//深度优先搜索
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (candidateQueueNo[i]!=0)
+//			continue;
+//		queueNo++;
+//		candidateQueues.push_back(new priority_queue<char, vector<char>, greater<char>>);
+//		dfs(isConnected, candidateQueueNo, i, queueNo, candidateQueues,s);
+//	}
+//
+//	//就地排序原始字符串
+//	for (int i = 0; i < n; i++)
+//	{
+//		s[i]=candidateQueues[candidateQueueNo[i] - 1]->top();
+//		candidateQueues[candidateQueueNo[i] - 1]->pop();
+//	}
+//	return s;
+//}
+
+
+//深度优先搜索，基于桶
+void dfs(const vector<vector<int>>& isConnected, vector<int>& candidateBucketNo, int startIndex, int bucketNo, vector<vector<int>*>& candidateBuckets, string& s)
+{
+	candidateBucketNo[startIndex] = bucketNo;
+	candidateBuckets[bucketNo - 1]->at(s[startIndex]-'a')++;
+	int size = isConnected.size();
+	for (int i = 0; i < size; i++)
+		if (1 == isConnected[startIndex][i] && 0 == candidateBucketNo[i])
+			dfs(isConnected, candidateBucketNo, i, bucketNo, candidateBuckets, s);
+}
+
+
+//深度优先搜索，基于桶
+//算法正确，但时间超时。
+//string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
+//{
+//	int n = s.length();
+//	vector<vector<int>> isConnected(n, vector<int>(n, 0)); //连接矩阵
+//	
+//	//构造连接矩阵
+//	for (vector<vector<int>>::iterator it = pairs.begin(); it != pairs.end(); it++)
+//	{
+//		isConnected[it->at(0)][it->at(1)] = 1;
+//		isConnected[it->at(1)][it->at(0)] = 1;
+//	}
+//
+//	vector<int> candidateBucketNo(n, 0); //长度与原始字符串相同，指出原始字符串的每一个位置属于哪一个连通域，每个连通域对应一个桶
+//	vector<vector<int>*> candidateBuckets; //存储各个桶，索引 = 该桶的编号 - 1 。
+//	int bucketNo = 0; //优先级队列编号
+//	
+//	//深度优先搜索
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (candidateBucketNo[i]!=0)
+//			continue;
+//		bucketNo++;
+//		candidateBuckets.push_back(new vector<int>(26,0));
+//		dfs(isConnected, candidateBucketNo, i, bucketNo, candidateBuckets,s);
+//	}
+//
+//	//就地排序原始字符串
+//	int pMin;
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (pMin=0;pMin<26;pMin++)
+//		{
+//			if (candidateBuckets[candidateBucketNo[i] - 1]->at(pMin) != 0)
+//			{
+//				s[i] = 'a' + pMin;
+//				candidateBuckets[candidateBucketNo[i] - 1]->at(pMin)--;
+//				break;
+//			}
+//		}
+//	}
+//	return s;
+//}
+
+
+class Pos2
+{
+public:
+	Pos2(int no) :no(no), domainNo(no) {} //初始化时，顶点和自己是不连通的，顶点自己就是一个连通域
+	int no;
+	int domainNo;
+	set<Pos2*> connectivityVertex; //连接顶点集
+	void addEdge(Pos2* connectVertex) //增加一条边
+	{
+		pair<set<Pos2*>::iterator, bool>result = connectivityVertex.insert(connectVertex);
+		if (false == result.second)
+			return;
+		//cout << "addEdge：增加一条边：  " << this->no << "-->" << connectVertex->no << endl;
+		connectivityVertex.insert(connectVertex);
+		connectVertex->domainNo = this->domainNo;
+		connectVertex->addEdge(this);
+		for (set<Pos2*>::iterator it = connectVertex->connectivityVertex.begin(); it != connectVertex->connectivityVertex.end(); it++)
+			this->addEdge(*it);
+	}
+
+
+};
+
+
+//无向图。将可交换的位置索引设为顶点，可交换的位置间的连通关系关系设为边，有无向边连接的索引位置可交换。首先遍历 pairs 数组构造关系图，每插入一个顶点都要确定该顶点的所有无向边，及所属连通域；使用若干个优先级队列，存储各连通域的字符，首先遍历一遍原始字符串，为各个连通域加入字符；查询时正向遍历字符串 s ，从串首开始将每个位置的字符替换为其连通域内的最小字符，随后在相应的优先级队列中删除该字符。
+//算法正确，但时间超时。
 string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 {
 	int n = s.length();
-	vector<vector<int>> isConnected(n, vector<int>(n, 0)); //连接矩阵
-	
-	//构造连接矩阵
+	map<int, Pos2*> vertexs; //顶点集
+	map<int, priority_queue<char, vector<char>, greater<char>>*> candidateQueues; //优先级队列集
+		
+	//构造关系图
 	for (vector<vector<int>>::iterator it = pairs.begin(); it != pairs.end(); it++)
 	{
-		isConnected[it->at(0)][it->at(1)] = 1;
-		isConnected[it->at(1)][it->at(0)] = 1;
+		if(vertexs.end()==vertexs.find(it->at(0)))
+			vertexs[it->at(0)]=new Pos2(it->at(0));
+		if (vertexs.end() == vertexs.find(it->at(1)))
+			vertexs[it->at(1)] = new Pos2(it->at(1));
+		vertexs.at(it->at(0))->addEdge(vertexs.at(it->at(1)));
 	}
 
-	vector<int> candidateQueueNo(n, 0); //长度与原始字符串相同，指出原始字符串的每一个位置属于哪一个连通域，每个连通域对应一个优先级队列
-	vector<priority_queue<char, vector<char>, greater<char>>*> candidateQueues; //存储各个优先级队列，索引 = 该优先级队列的编号 - 1 。
-	int queueNo = 0; //优先级队列编号
-	
-	//深度优先搜索
+	//构造优先级队列
+	map<int, Pos2*>::iterator itPos;
 	for (int i = 0; i < n; i++)
 	{
-		if (candidateQueueNo[i]!=0)
+		if (vertexs.end() == (itPos = vertexs.find(i)))
 			continue;
-		queueNo++;
-		candidateQueues.push_back(new priority_queue<char, vector<char>, greater<char>>);
-		dfs(isConnected, candidateQueueNo, i, queueNo, candidateQueues,s);
+		
+		if (candidateQueues.end() == candidateQueues.find(itPos->second->domainNo))
+			candidateQueues[itPos->second->domainNo] = new priority_queue<char, vector<char>, greater<char>>;
+
+		candidateQueues.at(itPos->second->domainNo)->push(s[i]);
 	}
 
-	//就地排序原始字符串
+	//查询关系图
 	for (int i = 0; i < n; i++)
 	{
-		s[i]=candidateQueues[candidateQueueNo[i] - 1]->top();
-		candidateQueues[candidateQueueNo[i] - 1]->pop();
+		if (vertexs.end() == (itPos = vertexs.find(i)))
+			continue;
+		s[i] = candidateQueues.at(itPos->second->domainNo)->top();
+		candidateQueues.at(itPos->second->domainNo)->pop();
 	}
 	return s;
 }
 
+
 int main()
 {
 	string test = "dcab";
-	vector<vector<int>> pairs = { {0, 3},{1, 2},{0,2 } };
+	vector<vector<int>> pairs = { {0, 3},{1, 2},{0, 2} };
 	//vector<vector<int>> pairs = { {0,0} };
 	string ret = smallestStringWithSwaps(test, pairs);
 	cout << "main：ret = " << ret << endl;
