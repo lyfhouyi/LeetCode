@@ -309,7 +309,7 @@ string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 }
 
 
-int main()
+int main1202()
 {
 	string test = "dcab";
 	vector<vector<int>> pairs = { {0, 3},{1, 2},{0, 2} };

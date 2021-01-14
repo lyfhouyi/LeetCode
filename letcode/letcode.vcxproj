@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="1018.cpp" />
     <ClCompile Include="1046_Easy.cpp" />
     <ClCompile Include="1202_Medium_XXX.cpp" />
     <ClCompile Include="123_Hard.cpp" />

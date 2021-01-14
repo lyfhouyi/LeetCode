@@ -99,5 +99,8 @@
     <ClCompile Include="1202_Medium_XXX.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="1018.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
