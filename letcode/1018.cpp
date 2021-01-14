@@ -28,8 +28,9 @@ vector<bool> prefixesDivBy5(vector<int>& A)
 	vector<bool> ret(n);
 	for (int i = 0; i < n; i++)
 	{
-		if (between > 5)
-			between -= 5;
+		//if (between > 5)
+		//	between -= 5; //等价于 between %= 5;
+		between %= 5;
 		between= A[i]+(between<<1); //加法运算的优先级高于移位运算
 		if (0 == between % 5)
 		{
