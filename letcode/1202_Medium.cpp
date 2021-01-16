@@ -268,48 +268,119 @@ public:
 
 //无向图。将可交换的位置索引设为顶点，可交换的位置间的连通关系关系设为边，有无向边连接的索引位置可交换。首先遍历 pairs 数组构造关系图，每插入一个顶点都要确定该顶点的所有无向边，及所属连通域；使用若干个优先级队列，存储各连通域的字符，首先遍历一遍原始字符串，为各个连通域加入字符；查询时正向遍历字符串 s ，从串首开始将每个位置的字符替换为其连通域内的最小字符，随后在相应的优先级队列中删除该字符。
 //算法正确，但时间超时。
+//string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
+//{
+//	int n = s.length();
+//	map<int, Pos2*> vertexs; //顶点集
+//	map<int, priority_queue<char, vector<char>, greater<char>>*> candidateQueues; //优先级队列集
+//		
+//	//构造关系图
+//	for (vector<vector<int>>::iterator it = pairs.begin(); it != pairs.end(); it++)
+//	{
+//		if(vertexs.end()==vertexs.find(it->at(0)))
+//			vertexs[it->at(0)]=new Pos2(it->at(0));
+//		if (vertexs.end() == vertexs.find(it->at(1)))
+//			vertexs[it->at(1)] = new Pos2(it->at(1));
+//		vertexs.at(it->at(0))->addEdge(vertexs.at(it->at(1)));
+//	}
+//
+//	//构造优先级队列
+//	map<int, Pos2*>::iterator itPos;
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (vertexs.end() == (itPos = vertexs.find(i)))
+//			continue;
+//		
+//		if (candidateQueues.end() == candidateQueues.find(itPos->second->domainNo))
+//			candidateQueues[itPos->second->domainNo] = new priority_queue<char, vector<char>, greater<char>>;
+//
+//		candidateQueues.at(itPos->second->domainNo)->push(s[i]);
+//	}
+//
+//	//查询关系图
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (vertexs.end() == (itPos = vertexs.find(i)))
+//			continue;
+//		s[i] = candidateQueues.at(itPos->second->domainNo)->top();
+//		candidateQueues.at(itPos->second->domainNo)->pop();
+//	}
+//	return s;
+//}
+
+
+class UnionFind
+{
+public:
+	UnionFind(int n): fa(vector<int>(n)), rank(vector<int>(n)){ init(n); }
+
+	void init(int n) //初始化，每个位置一个集合，位置自己是自己集合的代表元，每个集合的秩都为 1
+	{
+		for (int i = 0; i < n; i++)
+		{
+			fa[i] = i;
+			rank[i] = 1;
+		}
+			
+	}
+
+	int find(int index) //查找（路径压缩），找到位置 index 所在集合的代表元
+	{
+		if (index == fa[index])
+			return index;
+		else
+		{
+			fa[index] = find(fa[index]);
+			return fa[index];
+		}
+	}
+
+	void merge(int indexI, int indexJ) //合并（按秩合并）
+	{
+		int rootI = find(indexI);
+		int rootJ = find(indexJ);
+		if(rank[rootI]<=rank[rootJ])
+			fa[rootI]= rootJ;
+		else
+			fa[rootJ]= rootI;
+		if (rank[rootI] == rank[rootJ] && rootI!= rootJ)
+			rank[rootJ]++;
+
+	}
+private:
+	vector<int>fa; //父节点数组
+	vector<int>rank; //秩数组
+};
+
+
+//并查集。首先遍历 pairs 数组调整各连通域，随后遍历原始字符串 s 构造各连通域优先级队列，最后再遍历原始字符串 s 重构出输出字符串
 string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 {
 	int n = s.length();
-	map<int, Pos2*> vertexs; //顶点集
-	map<int, priority_queue<char, vector<char>, greater<char>>*> candidateQueues; //优先级队列集
-		
-	//构造关系图
+	UnionFind unionFind(n);
 	for (vector<vector<int>>::iterator it = pairs.begin(); it != pairs.end(); it++)
-	{
-		if(vertexs.end()==vertexs.find(it->at(0)))
-			vertexs[it->at(0)]=new Pos2(it->at(0));
-		if (vertexs.end() == vertexs.find(it->at(1)))
-			vertexs[it->at(1)] = new Pos2(it->at(1));
-		vertexs.at(it->at(0))->addEdge(vertexs.at(it->at(1)));
-	}
-
-	//构造优先级队列
-	map<int, Pos2*>::iterator itPos;
+		unionFind.merge(it->at(0), it->at(1));
+	map<int, priority_queue<char, vector<char>, greater<char>>*>candidateQueues;
+	map<int, priority_queue<char, vector<char>, greater<char>>*>::iterator itDomainQueue;
+	int domain;
 	for (int i = 0; i < n; i++)
 	{
-		if (vertexs.end() == (itPos = vertexs.find(i)))
-			continue;
-		
-		if (candidateQueues.end() == candidateQueues.find(itPos->second->domainNo))
-			candidateQueues[itPos->second->domainNo] = new priority_queue<char, vector<char>, greater<char>>;
-
-		candidateQueues.at(itPos->second->domainNo)->push(s[i]);
+		itDomainQueue = candidateQueues.find((domain=unionFind.find(i)));
+		if (candidateQueues.end() == itDomainQueue)
+			candidateQueues[domain] = new priority_queue<char, vector<char>, greater<char>>;
+		candidateQueues[domain]->push(s[i]);
 	}
-
-	//查询关系图
-	for (int i = 0; i < n; i++)
+	for (int i=0; i < n; i++)
 	{
-		if (vertexs.end() == (itPos = vertexs.find(i)))
-			continue;
-		s[i] = candidateQueues.at(itPos->second->domainNo)->top();
-		candidateQueues.at(itPos->second->domainNo)->pop();
+		s[i]=candidateQueues[domain = unionFind.find(i)]->top();
+		candidateQueues[domain]->pop();
 	}
 	return s;
+
 }
 
 
-int main1202()
+int main()
 {
 	string test = "dcab";
 	vector<vector<int>> pairs = { {0, 3},{1, 2},{0, 2} };

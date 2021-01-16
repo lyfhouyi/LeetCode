@@ -44,7 +44,7 @@ vector<bool> prefixesDivBy5(vector<int>& A)
 }
 
 
-int main()
+int main1018()
 {
 	vector<int> test = { 0,1,1,1,1,1,1 };
 	vector<bool> ret = prefixesDivBy5(test);

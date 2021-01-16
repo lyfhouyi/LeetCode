@@ -96,10 +96,10 @@
     <ClCompile Include="6_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="1202_Medium_XXX.cpp">
+    <ClCompile Include="1018_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="1018.cpp">
+    <ClCompile Include="1202_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
