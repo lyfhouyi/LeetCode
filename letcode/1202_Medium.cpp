@@ -30,10 +30,10 @@ using namespace std;
 class Pos
 {
 public:
-	Pos(int no,string& s):no(no),s(s),candidateQueue(nullptr), isInQueue(false){} //初始化时，顶点和自己是不连通的
+	Pos(int no, string& s) :no(no), s(s), candidateQueue(nullptr), isInQueue(false) {} //初始化时，顶点和自己是不连通的
 	int no;
 	string& s;
-	shared_ptr<priority_queue<char,vector<char>,greater<char>>> candidateQueue; //可交换字符构成的优先级队列
+	shared_ptr<priority_queue<char, vector<char>, greater<char>>> candidateQueue; //可交换字符构成的优先级队列
 	bool isInQueue; //当前字符是否在当前节点的可交换字符构成的优先级队列中
 	set<Pos*> connectivityVertex; //连接顶点集
 	void addEdge(Pos* connectVertex) //增加一条边
@@ -188,7 +188,7 @@ public:
 void dfs(const vector<vector<int>>& isConnected, vector<int>& candidateBucketNo, int startIndex, int bucketNo, vector<vector<int>*>& candidateBuckets, string& s)
 {
 	candidateBucketNo[startIndex] = bucketNo;
-	candidateBuckets[bucketNo - 1]->at(s[startIndex]-'a')++;
+	candidateBuckets[bucketNo - 1]->at(s[startIndex] - 'a')++;
 	int size = isConnected.size();
 	for (int i = 0; i < size; i++)
 		if (1 == isConnected[startIndex][i] && 0 == candidateBucketNo[i])
@@ -312,7 +312,7 @@ public:
 class UnionFind
 {
 public:
-	UnionFind(int n): fa(vector<int>(n)), rank(vector<int>(n)){ init(n); }
+	UnionFind(int n) : fa(vector<int>(n)), rank(vector<int>(n)) { init(n); }
 
 	void init(int n) //初始化，每个位置一个集合，位置自己是自己集合的代表元，每个集合的秩都为 1
 	{
@@ -321,7 +321,7 @@ public:
 			fa[i] = i;
 			rank[i] = 1;
 		}
-			
+
 	}
 
 	int find(int index) //查找（路径压缩），找到位置 index 所在集合的代表元
@@ -335,15 +335,15 @@ public:
 		}
 	}
 
-	void merge(int indexI, int indexJ) //合并（按秩合并）
+	void merge(int indexI, int indexJ) //合并（按秩合并），indexI 所在域吞并 indexJ 所在域，合并后，域的代表元为原 indexI 所在域的代表元
 	{
 		int rootI = find(indexI);
 		int rootJ = find(indexJ);
-		if(rank[rootI]<=rank[rootJ])
-			fa[rootI]= rootJ;
+		if (rank[rootI] < rank[rootJ])
+			fa[rootI] = rootJ;
 		else
-			fa[rootJ]= rootI;
-		if (rank[rootI] == rank[rootJ] && rootI!= rootJ)
+			fa[rootJ] = rootI;
+		if (rank[rootI] == rank[rootJ] && rootI != rootJ)
 			rank[rootJ]++;
 
 	}
@@ -365,14 +365,14 @@ string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 	int domain;
 	for (int i = 0; i < n; i++)
 	{
-		itDomainQueue = candidateQueues.find((domain=unionFind.find(i)));
+		itDomainQueue = candidateQueues.find((domain = unionFind.find(i)));
 		if (candidateQueues.end() == itDomainQueue)
 			candidateQueues[domain] = new priority_queue<char, vector<char>, greater<char>>;
 		candidateQueues[domain]->push(s[i]);
 	}
-	for (int i=0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		s[i]=candidateQueues[domain = unionFind.find(i)]->top();
+		s[i] = candidateQueues[domain = unionFind.find(i)]->top();
 		candidateQueues[domain]->pop();
 	}
 	return s;
@@ -380,7 +380,7 @@ string smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 }
 
 
-int main()
+int main1202()
 {
 	string test = "dcab";
 	vector<vector<int>> pairs = { {0, 3},{1, 2},{0, 2} };

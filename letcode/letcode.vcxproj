@@ -152,6 +152,7 @@
     <ClCompile Include="830_Easy.cpp" />
     <ClCompile Include="86_Medium.cpp" />
     <ClCompile Include="88_Easy.cpp" />
+    <ClCompile Include="947_Medium.cpp" />
     <ClCompile Include="990_Medium.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
