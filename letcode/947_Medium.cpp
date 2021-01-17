@@ -13,9 +13,9 @@ using namespace std;
 //
 //提示：
 //
-//1 <= stones.length <= 1000
-//0 <= xi, yi <= 104
-//不会有两块石头放在同一个坐标点上
+//	1 <= stones.length <= 1000
+//	0 <= xi, yi <= 104
+//	不会有两块石头放在同一个坐标点上
 //
 //来源：力扣（LeetCode）
 //链接：https ://leetcode-cn.com/problems/most-stones-removed-with-same-row-or-column

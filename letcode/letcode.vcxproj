@@ -127,6 +127,7 @@
     <ClCompile Include="1018_Easy.cpp" />
     <ClCompile Include="1046_Easy.cpp" />
     <ClCompile Include="1202_Medium.cpp" />
+    <ClCompile Include="1232_Easy.cpp" />
     <ClCompile Include="123_Hard.cpp" />
     <ClCompile Include="134_Medium.cpp" />
     <ClCompile Include="188_Hard.cpp" />
