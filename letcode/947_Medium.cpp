@@ -48,7 +48,7 @@ public:
 		}
 	}
 
-	void merge(int indexI, int indexJ) //合并（按秩合并），indexI 所在域吞并 indexJ 所在域，合并后，域的代表元为原 indexI 所在域的代表元
+	void merge(int indexI, int indexJ) //合并（按秩合并）
 	{
 		int rootI = find(indexI);
 		int rootJ = find(indexJ);
