@@ -133,7 +133,7 @@ vector<vector<string>> accountsMerge(vector<vector<string>>& accounts)
 }
 
 
-int main()
+int main721()
 {
 	vector<vector<string>> test = { {"David", "David0@m.co", "David1@m.co"},
 	{ "David", "David3@m.co", "David4@m.co" },
@@ -148,4 +148,5 @@ int main()
 			cout << it->at(i) << ",";
 		cout << endl;
 	}
+	return 0;
 }
