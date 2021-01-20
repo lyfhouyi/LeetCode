@@ -21,23 +21,38 @@ int maxProduct(vector<int>& nums)
 	const int n = nums.size();
 	vector<vector<int>> dp(n, vector<int>(n, 0));
 	int maxValue = INT_MIN;
-
+	int currentMax = INT_MIN;
+	int currentMin = INT_MAX;
+	int tmp1;
+	int tmp2;
+	bool skip = false;
 	//行优先遍历
 	for (int i = 0; i < n; i++)
 	{
-		if (nums[i] == 1)
+		skip = false;
+		if ((nums[i] == 1 || nums[i] == -1) && (i != 0) && (nums[i - 1] != 0) && (currentMax != 0) && (currentMin != 0))
 		{
-			maxValue = (maxValue > 1 ? maxValue : 1);
-			continue;
+			tmp1 = currentMax / nums[i - 1];
+			tmp2 = currentMin / nums[i - 1];
+			currentMax = tmp1 > tmp2 ? tmp1 : tmp2;
+			currentMin = tmp1 < tmp2 ? tmp1 : tmp2;
+			skip = true;
 		}
-		for (int j = i; j < n; j++)
+		if (!skip)
 		{
-			if (i == j)
-				dp[i][j] = nums[i];
-			else
-				dp[i][j] = dp[i][j - 1] * nums[j];
-			maxValue = (maxValue > dp[i][j] ? maxValue : dp[i][j]);
+			currentMax = INT_MIN;
+			currentMin = INT_MAX;
+			for (int j = i; j < n; j++)
+			{
+				if (i == j)
+					dp[i][j] = nums[i];
+				else
+					dp[i][j] = dp[i][j - 1] * nums[j];
+				currentMax = (currentMax > dp[i][j] ? currentMax : dp[i][j]);
+				currentMin = (currentMin < dp[i][j] ? currentMin : dp[i][j]);
+			}
 		}
+		maxValue = (maxValue > currentMax ? maxValue : currentMax);
 	}
 	return maxValue;
 }
@@ -82,7 +97,13 @@ int main()
 	//vector<int> test = { 2,3,-2,4 };
 	//vector<int> test = { -2,0,-1 };
 	//vector<int> test = {2,3,8,0,2,5};
-	vector<int> test = {-3,0,1,-2};
+	//vector<int> test = { -1,-1 };
+	//vector<int> test = {-3,0,1,-2};
+	//vector<int> test = { -2,0,-1 };
+	//vector<int> test = {-3,0,-1,-2};
+	//vector<int> test = { 0,-3 ,1,1 };
+	//vector<int> test = {-2,1,0};
+	vector<int> test = { -2,-1,-3,3 };
 	int ret = maxProduct(test);
 	cout << "main：ret = " << ret << endl;
 	return 0;

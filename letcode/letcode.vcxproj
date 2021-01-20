@@ -146,6 +146,7 @@
     <ClCompile Include="509_Easy.cpp" />
     <ClCompile Include="50_Medium.cpp" />
     <ClCompile Include="516_Medium.cpp" />
+    <ClCompile Include="53_Easy.cpp" />
     <ClCompile Include="547_Medium.cpp" />
     <ClCompile Include="5_Medium.cpp" />
     <ClCompile Include="605_Easy.cpp" />
