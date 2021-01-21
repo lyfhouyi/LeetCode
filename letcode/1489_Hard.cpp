@@ -113,8 +113,13 @@ int weightOfMST(int n, vector<vector<int>>& edges)
 //遍历边集。一条边，若1.包含它的树比不包含它的树权重大，则它为不安全边；2.包含它的树比不包含它的树权重小，则它为关键边；3.包含它的树与不包含它的树权重相同，则它为非关键边。
 vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges)
 {
-	sort(edges.begin(), edges.end(), [&](vector<int> edgeA, vector<int> edgeB) {return edgeA[2] < edgeB[2]; }); //对边集排序
 	int m = edges.size();
+	map<pair<int, int>, int>edgeNo;
+	for (int i = 0; i < m; i++)
+	{
+		edgeNo[make_pair(edges[i][0], edges[i][1])] = i;
+	}
+	sort(edges.begin(), edges.end(), [&](vector<int> edgeA, vector<int> edgeB) {return edgeA[2] < edgeB[2]; }); //对边集排序
 	int origin;
 	int weightInclude;
 	int weightNoInclude;
@@ -125,15 +130,15 @@ vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>
 		origin = edges[i][2]; //初始权重
 		edges[i][2] = -edges[i][2]; //设为包含（权重为原始权重的相反数）
 		weightInclude = weightOfMST(n, edges);
-		cout << "findCriticalAndPseudoCriticalEdges：边  " << i << "  weightInclude = " << weightInclude << endl;
+		cout << "findCriticalAndPseudoCriticalEdges：边（排序后）  " << i << "  weightInclude = " << weightInclude << endl;
 		edges[i][2] = 0; //设为不包含（权重为 0）
 		weightNoInclude = weightOfMST(n, edges);
-		cout << "findCriticalAndPseudoCriticalEdges：边  " << i << "  weightNoInclude = " << weightNoInclude << endl;
+		cout << "findCriticalAndPseudoCriticalEdges：边（排序后）  " << i << "  weightNoInclude = " << weightNoInclude << endl;
 		if (weightNoInclude == weightInclude)
-			pseudoCriticalEdges.push_back(i);
+			pseudoCriticalEdges.push_back(edgeNo.at(make_pair(edges[i][0], edges[i][1])));
 		else
 			if (weightNoInclude > weightInclude)
-				criticalEdges.push_back(i);
+				criticalEdges.push_back(edgeNo.at(make_pair(edges[i][0], edges[i][1])));
 		edges[i][2] = origin;
 	}
 	vector<vector<int>> ret(2);
