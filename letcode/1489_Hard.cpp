@@ -111,49 +111,95 @@ int weightOfMST(int n, vector<vector<int>>& edges)
 
 
 //遍历边集。一条边，若1.包含它的树比不包含它的树权重大，则它为不安全边；2.包含它的树比不包含它的树权重小，则它为关键边；3.包含它的树与不包含它的树权重相同，则它为非关键边。
+//vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges)
+//{
+//	int m = edges.size();
+//	map<pair<int, int>, int>edgeNo;
+//	for (int i = 0; i < m; i++)
+//	{
+//		edgeNo[make_pair(edges[i][0], edges[i][1])] = i;
+//	}
+//	sort(edges.begin(), edges.end(), [](vector<int> edgeA, vector<int> edgeB) {return edgeA[2] < edgeB[2]; }); //对边集排序
+//	int origin;
+//	int weightInclude;
+//	int weightNoInclude;
+//	int cntMST = 0;
+//	vector<int> criticalEdges;
+//	vector<int> pseudoCriticalEdges;
+//	for (int i = 0; i < m; i++)
+//	{
+//		origin = edges[i][2]; //初始权重
+//		edges[i][2] = -edges[i][2]; //设为包含（权重为原始权重的相反数）
+//		cntMST++;
+//		weightInclude = weightOfMST(n, edges);
+//		cout << "findCriticalAndPseudoCriticalEdges：边（排序后）  " << i << "  weightInclude = " << weightInclude << endl;
+//		edges[i][2] = 0; //设为不包含（权重为 0）
+//		cntMST++;
+//		weightNoInclude = weightOfMST(n, edges);
+//		cout << "findCriticalAndPseudoCriticalEdges：边（排序后）  " << i << "  weightNoInclude = " << weightNoInclude << endl;
+//		if (weightNoInclude == weightInclude)
+//			pseudoCriticalEdges.push_back(edgeNo.at(make_pair(edges[i][0], edges[i][1])));
+//		else
+//			if (weightNoInclude > weightInclude)
+//				criticalEdges.push_back(edgeNo.at(make_pair(edges[i][0], edges[i][1])));
+//		edges[i][2] = origin;
+//	}
+//	vector<vector<int>> ret(2);
+//	ret[0] = criticalEdges;
+//	ret[1] = pseudoCriticalEdges;
+//	cout << "findCriticalAndPseudoCriticalEdges：cntMST = " << cntMST << endl;
+//	return ret;
+//}
+
+
+//优化版本。
+//遍历边集。一条边首先判断它是不是关键边；若不是关键边，再判断它是不是非关键边。
 vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges)
 {
 	int m = edges.size();
-	map<pair<int, int>, int>edgeNo;
 	for (int i = 0; i < m; i++)
 	{
-		edgeNo[make_pair(edges[i][0], edges[i][1])] = i;
+		edges[i].push_back(i);
 	}
-	sort(edges.begin(), edges.end(), [&](vector<int> edgeA, vector<int> edgeB) {return edgeA[2] < edgeB[2]; }); //对边集排序
+	sort(edges.begin(), edges.end(), [](vector<int> edgeA, vector<int> edgeB) {return edgeA[2] < edgeB[2]; }); //对边集排序
 	int origin;
-	int weightInclude;
-	int weightNoInclude;
-	vector<int> criticalEdges;
-	vector<int> pseudoCriticalEdges;
+	int weightChanged;
+	int initWeight= weightOfMST(n, edges);
+	int cntMST = 1;
+	vector<vector<int>> ret(2);
+
 	for (int i = 0; i < m; i++)
 	{
-		origin = edges[i][2]; //初始权重
-		edges[i][2] = -edges[i][2]; //设为包含（权重为原始权重的相反数）
-		weightInclude = weightOfMST(n, edges);
-		cout << "findCriticalAndPseudoCriticalEdges：边（排序后）  " << i << "  weightInclude = " << weightInclude << endl;
-		edges[i][2] = 0; //设为不包含（权重为 0）
-		weightNoInclude = weightOfMST(n, edges);
-		cout << "findCriticalAndPseudoCriticalEdges：边（排序后）  " << i << "  weightNoInclude = " << weightNoInclude << endl;
-		if (weightNoInclude == weightInclude)
-			pseudoCriticalEdges.push_back(edgeNo.at(make_pair(edges[i][0], edges[i][1])));
-		else
-			if (weightNoInclude > weightInclude)
-				criticalEdges.push_back(edgeNo.at(make_pair(edges[i][0], edges[i][1])));
+		origin = edges[i][2];
+		edges[i][2] = 0;
+		cntMST++;
+		weightChanged = weightOfMST(n, edges);
 		edges[i][2] = origin;
+		if (weightChanged > initWeight) // i 是关键边，则 i 必不可能是非关键边
+		{
+			ret[0].push_back(edges[i][3]);
+			continue;
+		}
+
+		edges[i][2] = -edges[i][2];
+		cntMST++;
+		weightChanged = weightOfMST(n, edges);
+		edges[i][2] = origin;
+		if(weightChanged == initWeight) // i 是非关键边
+			ret[1].push_back(edges[i][3]);
 	}
-	vector<vector<int>> ret(2);
-	ret[0] = criticalEdges;
-	ret[1] = pseudoCriticalEdges;
+
+	//cout << "findCriticalAndPseudoCriticalEdges：cntMST = " << cntMST << endl;
 	return ret;
 }
 
 
-int main()
+int main1489()
 {
-	//vector<vector<int>> test = { {0, 1, 1},{1, 2, 1}, {2, 3, 2}, {0, 3, 2},{0, 4, 3},{3, 4, 3},{1, 4, 6} };
+	vector<vector<int>> test = { {0, 1, 1},{1, 2, 1}, {2, 3, 2}, {0, 3, 2},{0, 4, 3},{3, 4, 3},{1, 4, 6} };
 	//vector<vector<int>> test = { {0, 1, 1},{1, 2, 1}, {2, 3, 1}, {0, 3, 1} };
-	vector<vector<int>> test = { {0, 1, 1},{1, 2, 1}, {0, 2, 1}, {2, 3, 4}, {3, 4, 2} , {3, 5, 2} , {4, 5, 2} };
-	vector<vector<int>> ret = findCriticalAndPseudoCriticalEdges(6, test);
+	//vector<vector<int>> test = { {0, 1, 1},{1, 2, 1}, {0, 2, 1}, {2, 3, 4}, {3, 4, 2} , {3, 5, 2} , {4, 5, 2} };
+	vector<vector<int>> ret = findCriticalAndPseudoCriticalEdges(5, test);
 	cout << "main：ret = " << endl;
 	vector<int>& criticalEdges = ret[0];
 	vector<int>& pseudoCriticalEdges = ret[1];
