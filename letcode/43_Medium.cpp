@@ -20,41 +20,46 @@ using namespace std;
 
 
 //提取字符串 num 的第 n 低位
-int getBit(int n, string num)
+int getBit(int n, string& num)
 {
+	int m = num.length();
 	if (n > num.length())
 		return 0;
-	return num[n - 1];
+	return num[m - n] - 48;
 }
 
 
 //反向遍历字符串。第 n 位 = Σ(i=1,2,...,n) 第二串的第 i 低位 × 第二串的第 (n - i + 1) 低位 + 第 n - 1 位的进位；n 最大等于两串长度之和。
-string multiply(string num1, string num2) 
+string multiply(string num1, string num2)
 {
 	int carryBit = 0;
 	string ret;
 	int tmp;
 	int carrayBit = 0;
 	int n = num1.length() + num2.length();
-	
+
 	//计算返回字符串的第 i 低位
 	for (int i = 1; i <= n; i++)
 	{
+		tmp = 0;
 		for (int j = 1; j <= i; j++)
-			tmp = getBit(j, num2)*getBit(i - j + 1, num1)+ carryBit;
-		ret.push_back(tmp % 10);
+			tmp += getBit(j, num2)*getBit(i - j + 1, num1);
+		tmp += carryBit;
+		ret.push_back(48 + tmp % 10);
 		carryBit = tmp / 10;
 	}
 
-	
-	
-	return num1;
+	//清空尾部的 0
+	while (48 == ret[ret.length() - 1] && ret.length() != 1)
+		ret.pop_back();
+	reverse(ret.begin(), ret.end());
+	return ret;
 }
 
-int main()
+int main43()
 {
 	string num1 = "123";
-	string num2 = "456";
+	string num2 = "0";
 	string ret = multiply(num1, num2);
 	cout << "main：ret = " << ret << endl;
 }
