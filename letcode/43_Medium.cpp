@@ -62,4 +62,5 @@ int main43()
 	string num2 = "0";
 	string ret = multiply(num1, num2);
 	cout << "main：ret = " << ret << endl;
+	return 0;
 }
