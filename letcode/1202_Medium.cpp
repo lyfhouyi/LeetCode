@@ -339,13 +339,14 @@ public:
 	{
 		int rootI = find(indexI);
 		int rootJ = find(indexJ);
+		if (rootI == rootJ)
+			return;
 		if (rank[rootI] < rank[rootJ])
 			fa[rootI] = rootJ;
 		else
 			fa[rootJ] = rootI;
-		if (rank[rootI] == rank[rootJ] && rootI != rootJ)
+		if (rank[rootI] == rank[rootJ])
 			rank[rootJ]++;
-
 	}
 private:
 	vector<int>fa; //父节点数组
