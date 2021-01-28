@@ -1,6 +1,5 @@
 ﻿#include<iostream>
 #include<vector>
-//#include<algorithm>
 
 using namespace std;
 
@@ -81,6 +80,7 @@ private:
 };
 
 
+//并查集。优先考察公共边，随后考察 Alice 和 Bob 的独占边。
 int maxNumEdgesToRemove(int n, vector<vector<int>>& edges)
 {
 	int m = edges.size();
@@ -148,7 +148,7 @@ int maxNumEdgesToRemove(int n, vector<vector<int>>& edges)
 }
 
 
-int main()
+int main1579()
 {
 	//vector<vector<int>> test = { {3, 1, 2},{3, 2, 3},{1, 1, 3},{1, 2, 4},{1, 1, 2},{2, 3, 4} };
 	vector<vector<int>> test = { {3, 2, 3},{1, 1, 2},{2, 3, 4} };

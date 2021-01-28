@@ -126,6 +126,8 @@
   <ItemGroup>
     <ClCompile Include="1018_Easy.cpp" />
     <ClCompile Include="1046_Easy.cpp" />
+    <ClCompile Include="1128_Easy.cpp" />
+    <ClCompile Include="11_Medium.cpp" />
     <ClCompile Include="1202_Medium.cpp" />
     <ClCompile Include="1232_Easy.cpp" />
     <ClCompile Include="123_Hard.cpp" />
@@ -162,10 +164,12 @@
     <ClCompile Include="674_Easy.cpp" />
     <ClCompile Include="6_Medium.cpp" />
     <ClCompile Include="721_Medium.cpp" />
+    <ClCompile Include="724_Easy.cpp" />
     <ClCompile Include="825_Medium.cpp" />
     <ClCompile Include="830_Easy.cpp" />
     <ClCompile Include="86_Medium.cpp" />
     <ClCompile Include="88_Easy.cpp" />
+    <ClCompile Include="8_Medium.cpp" />
     <ClCompile Include="947_Medium.cpp" />
     <ClCompile Include="959_Medium.cpp" />
     <ClCompile Include="989_Easy.cpp" />
