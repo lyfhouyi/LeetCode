@@ -77,7 +77,7 @@ int myAtoi(string s)
 }
 
 
-int main()
+int main8()
 {
 	//string test = "+4193 with words";
 	//string test = "-91283472332";

@@ -165,5 +165,14 @@
     <ClCompile Include="8_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="1631_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="778_Hard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="839_Hard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
