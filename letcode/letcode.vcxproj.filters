@@ -177,5 +177,11 @@
     <ClCompile Include="888_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="42_Hard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="424_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

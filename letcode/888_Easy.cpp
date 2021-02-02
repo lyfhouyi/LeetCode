@@ -102,7 +102,7 @@ vector<int> fairCandySwap(vector<int>& A, vector<int>& B)
 }
 
 
-int main()
+int main888()
 {
 	vector<int> B = { 1,2,5 };
 	vector<int> A = { 2,4 };
