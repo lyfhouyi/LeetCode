@@ -22,84 +22,57 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-//双指针遍历数组。以内容集 containSet 为当前考察的子数组所包含的不同元素的集合；不断考察以两个指针为边界构成的子数组，通过子数组的首尾元素判断该子数组是否为好子数组。
-int subarraysWithKDistinct(vector<int>& A, int K) 
+//计算最大包含 K 个不同整数的子数组数量。使用双指针构造滑动窗口，统计窗口内不同整数的数量；若该数量大于 k 则将窗口左端右移一位，否则将窗口右端右移一位；
+int subarraysMaxKDistinct(vector<int>& A, int K)
 {
 	int n = A.size();
-	map<int, int> containMap;
-	int i=0;
-	int j =0;
-	int goodArrayCnt = 0;
-	int tmp = 1;
-	map<int, int> containMap2;
+	int windowLeft = 0;
+	int windowRight = -1;
+	int subarrayCnt = 0;
+	map<int, int> intCountMap;
 
-	//区间 [i,j] 为待考察的子数组。
-	while (i < n || j<n)
+	//以 [windowLeft,windowRight] 作为滑动窗口
+	while (windowLeft < n)
 	{
-		if (containMap.size() < K) //以 i 为首元素的子数组集中尚未找到好子数组
+		while (windowRight < n && intCountMap.size() <= K) //移动滑动窗口的右端
 		{
-			if (j == n)
-				return goodArrayCnt;
+			windowRight++;
+			if (windowRight == n)
+				break;
+			if (intCountMap.count(A[windowRight]) > 0)
+				intCountMap.at(A[windowRight])++;
 			else
-			{
-				if (1 == containMap.count(A[j]))
-					containMap.at(A[j])++;
-				else
-					containMap[A[j]] = 1;
-				j++;
-			}
+				intCountMap[A[windowRight]] = 1;
 		}
-		else //以 i 为首元素的子数组集中已找到好子数组
-		{
-			
 
+		//计算以 windowLeft 为左端的最大包含 K 个不同整数的子数组的数量
+		subarrayCnt += windowRight - windowLeft;
 
-
-			goodArrayCnt+= tmp; //找到好子数组
-			cout << "subarraysWithKDistinct：找到好子数组  [" << i << "," << j << "]" <<" tmp = " <<tmp<<endl;
-			cout << "goodArrayCnt = " << goodArrayCnt << endl;
-
-			if (j == n - 1)
-			{
-				return goodArrayCnt;
-			}
-			else
-			{
-				while (containMap.at(A[i]) != 1) // A[i] 在子数组中不唯一 
-				{
-					tmp++;
-					cout << "subarraysWithKDistinct：缓冲 + 1 ：tmp = " <<tmp<<endl;
-					containMap.at(A[i])--;
-					i++;
-				}
-
-				if (1 == containMap.count(A[j+1]))
-				{
-					containMap.at(A[j+1])++;
-					j++;
-				}
-				else
-				{
-					tmp = 1;
-					cout << "subarraysWithKDistinct：缓冲置 1 ：tmp = " << tmp << endl;
-					containMap.erase(A[i]);
-					i++;
-					containMap[A[j + 1]]=1;
-					j++;
-				}
-			}
-		}
+		//滑动窗口左端右移一位
+		if (1 == intCountMap.at(A[windowLeft]))
+			intCountMap.erase(A[windowLeft]);
+		else
+			intCountMap.at(A[windowLeft])--;
+		windowLeft++;
 	}
-	return -1;
+	return subarrayCnt;
+}
+
+
+//双指针构造滑动窗。恰好包含 K 个不同整数的子数组数量 = 最大包含 K 个不同整数的子数组数量 - 最大包含 K - 1 个不同整数的子数组数量。
+int subarraysWithKDistinct(vector<int>& A, int K)
+{
+	return subarraysMaxKDistinct(A, K) - subarraysMaxKDistinct(A, K - 1);
 }
 
 
 int main992()
 {
 	////vector<int> test = { 1};
-	vector<int> test = { 1,1,2,1,1};
+	//vector<int> test = {7,7,8,9,9};
+	vector<int> test = { 1,2,1,2,3 };
 	//vector<int> test = { 1,2,1,3,4 };
-	int ret = subarraysWithKDistinct(test,2);
+	int ret = subarraysWithKDistinct(test, 2);
 	cout << "main：ret = " << ret << endl;
 	return 0;
 }
