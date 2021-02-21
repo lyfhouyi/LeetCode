@@ -243,5 +243,14 @@
     <ClCompile Include="1004_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="406_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="697_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="1438_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

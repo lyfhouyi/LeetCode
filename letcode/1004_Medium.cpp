@@ -52,7 +52,7 @@ int longestOnes(vector<int>& A, int K)
 }
 
 
-int main()
+int main1004()
 {
 	vector<int> test = { 1 };
 	//vector<int> test = { 0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1 };
