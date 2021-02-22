@@ -180,12 +180,14 @@
     <ClCompile Include="643_Easy.cpp" />
     <ClCompile Include="647_Medium.cpp" />
     <ClCompile Include="665_Easy.cpp" />
+    <ClCompile Include="673_Medium.cpp" />
     <ClCompile Include="674_Easy.cpp" />
     <ClCompile Include="697_Easy.cpp" />
     <ClCompile Include="6_Medium.cpp" />
     <ClCompile Include="721_Medium.cpp" />
     <ClCompile Include="724_Easy.cpp" />
     <ClCompile Include="765_Hard.cpp" />
+    <ClCompile Include="766_Easy.cpp" />
     <ClCompile Include="778_Hard.cpp" />
     <ClCompile Include="7_Easy.cpp" />
     <ClCompile Include="825_Medium.cpp" />

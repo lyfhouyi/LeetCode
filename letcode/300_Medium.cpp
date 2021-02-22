@@ -27,7 +27,7 @@ using namespace std;
 
 //一维动态规划。计算一个数组：dp[i] 表示以索引为 i 的元素结尾的子序列中的最长严格递增子序列的长度。
 //状态转移函数：对 dp[i] ，遍历 nums 数组的 j ∈ [0,i - 1]，令 dp[i] 为满足 nums[j] < nums[i] 的 dp[j] 的最大值 + 1。若无满足  nums[j] < nums[i] 的 j ，则令 dp[i] = 1 。
-//边界条件：nums[0] = 1 。
+//边界条件：dp[0] = 1 。
 //最优解：dp[:] 的最大值。
 //int lengthOfLIS(vector<int>& nums)
 //{
