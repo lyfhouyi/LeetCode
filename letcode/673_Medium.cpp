@@ -11,6 +11,8 @@ using namespace std;
 //来源：力扣（LeetCode）
 //链接：https ://leetcode-cn.com/problems/number-of-longest-increasing-subsequence
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+
 //一维动态规划。维护两个数组：dp[i] 表示以索引为 i 的元素结尾的子序列中的最长严格递增子序列的长度。cnt[i] 表示以索引为 i 的元素结尾的子序列中取得最长严格递增子序列时的可行解（“路径”）个数。
 //状态转移函数：对 dp[i] ，遍历 nums 数组的 j ∈ [0,i - 1]，令 dp[i] 为满足 nums[j] < nums[i] 的 dp[j] 的最大值 + 1，令 cnt[i] 为与该 dp[j] 数值相等的可行解（“路径”）的个数的总和。若无满足  nums[j] < nums[i] 的 j ，则令 dp[i] = 1 ，cnt[i] = 1 。
 //边界条件：dp[0] = 1 。
