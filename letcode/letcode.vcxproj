@@ -155,6 +155,7 @@
     <ClCompile Include="295_Hard.cpp" />
     <ClCompile Include="2_Medium.cpp" />
     <ClCompile Include="300_Medium.cpp" />
+    <ClCompile Include="303_Easy.cpp" />
     <ClCompile Include="330_Hard.cpp" />
     <ClCompile Include="36_Medium.cpp" />
     <ClCompile Include="37xxx_Hard.cpp" />
