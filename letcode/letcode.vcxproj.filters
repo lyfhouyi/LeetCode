@@ -297,5 +297,14 @@
     <ClCompile Include="303_Easy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="304_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="338_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="500_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
