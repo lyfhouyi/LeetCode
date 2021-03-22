@@ -26,44 +26,44 @@ using namespace std;
 
 
 //解法一：使用栈记录需置零的行和列。首先遍历原始矩阵，记录需置零的行和列；随后将需置零的行和列置零。
-void setZeroes(vector<vector<int>>& matrix)
-{
-	stack<int> rowStack;
-	stack<int> colStack;
-	int m = matrix.size();
-	int n = matrix[0].size();
-	for (int i = 0; i < m; i++) //记录需置零的行和列
-	{
-		for (int j = 0; j < n; j++)
-		{
-			if (matrix[i][j] == 0)
-			{
-				rowStack.push(i);
-				colStack.push(j);
-			}
-		}
-	}
-
-	int tmp;
-	while (!rowStack.empty()) //将需置零的行置零
-	{
-		tmp = rowStack.top();
-		rowStack.pop();
-		for (int j = 0; j < n; j++)
-		{
-			matrix[tmp][j] = 0;
-		}
-	}
-	while (!colStack.empty()) //将需置零的列置零
-	{
-		tmp = colStack.top();
-		colStack.pop();
-		for (int i = 0; i < m; i++)
-		{
-			matrix[i][tmp] = 0;
-		}
-	}
-}
+//void setZeroes(vector<vector<int>>& matrix)
+//{
+//	stack<int> rowStack;
+//	stack<int> colStack;
+//	int m = matrix.size();
+//	int n = matrix[0].size();
+//	for (int i = 0; i < m; i++) //记录需置零的行和列
+//	{
+//		for (int j = 0; j < n; j++)
+//		{
+//			if (matrix[i][j] == 0)
+//			{
+//				rowStack.push(i);
+//				colStack.push(j);
+//			}
+//		}
+//	}
+//
+//	int tmp;
+//	while (!rowStack.empty()) //将需置零的行置零
+//	{
+//		tmp = rowStack.top();
+//		rowStack.pop();
+//		for (int j = 0; j < n; j++)
+//		{
+//			matrix[tmp][j] = 0;
+//		}
+//	}
+//	while (!colStack.empty()) //将需置零的列置零
+//	{
+//		tmp = colStack.top();
+//		colStack.pop();
+//		for (int i = 0; i < m; i++)
+//		{
+//			matrix[i][tmp] = 0;
+//		}
+//	}
+//}
 
 
 //解法二：使用原始矩阵的第一行和第一列记录需置零的行和列，使用两个辅助变量记录原始矩阵的第一行和第一列是否已包含零。首先遍历原矩阵的第一行和第一列，记录其是否已包含零，随后遍历原始矩阵，使用原矩阵的第一行和第一列记录需置零的行和列；最后将需置零的行和列（包括第一行和第一列）置零。
@@ -81,7 +81,7 @@ void setZeroes(vector<vector<int>>& matrix)
 			break;
 		}
 	}
-	for (int i = 0; i <m; i++) //记录原始矩阵的第一列是否已包含零
+	for (int i = 0; i < m; i++) //记录原始矩阵的第一列是否已包含零
 	{
 		if (matrix[i][0] == 0)
 		{
@@ -105,7 +105,7 @@ void setZeroes(vector<vector<int>>& matrix)
 	{
 		for (int j = 1; j < n; j++)
 		{
-			if (matrix[0][j] == 0 || matrix[i][0]==0)
+			if (matrix[0][j] == 0 || matrix[i][0] == 0)
 			{
 				matrix[i][j] = 0;
 			}
@@ -128,7 +128,7 @@ void setZeroes(vector<vector<int>>& matrix)
 }
 
 
-int main()
+int main73()
 {
 	vector<vector<int>> test = { {0, 1, 2, 0},{3, 4, 5, 2}, {1, 3, 1, 5} };
 	setZeroes(test);
