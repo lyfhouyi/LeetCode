@@ -26,16 +26,16 @@ using namespace std;
 
 
 //解法一：逐个比较末位是否为 1 。
-int hammingWeight(uint32_t n)
-{
-	int cnt = 0;
-	while (n != 0)
-	{
-		cnt += (n & 1);
-		n >>= 1;
-	}
-	return cnt;
-}
+//int hammingWeight(uint32_t n)
+//{
+//	int cnt = 0;
+//	while (n != 0)
+//	{
+//		cnt += (n & 1);
+//		n >>= 1;
+//	}
+//	return cnt;
+//}
 
 
 //解法二：直接检查 n 的最后一个 1 位。
