@@ -37,7 +37,7 @@ bool find132pattern(vector<int>& nums)
 	}
 	for (int i = 1; i < n; i++) //预计算右侧受限最大值数组
 	{
-		minLeft[i] = minLeft[i - 1] < nums[i - 1] ? minLeft[i - 1] : nums[i - 1];
+		minLeft[i] = minLeft[i - 1] < nums[i - 1] ? minLeft[i - 1] : nums[i - 1];l
 	}
 	return false;
 }
