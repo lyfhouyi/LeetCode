@@ -82,7 +82,7 @@ private:
 //};
 
 
-//解法二：栈。使用一个栈，栈顶元素为当前指向的 NestedInteger 数组的索引及数组尾。当当前指向的下一个元素为一个 NestedInteger 数组时，将该 NestedInteger 数组的相关信息压栈。
+//解法二：栈。使用一个栈，栈顶元素为当前需要取出的元素位置，指向的 NestedInteger 数组的索引及数组尾。当当前指向的下一个元素为一个 NestedInteger 数组时，将该 NestedInteger 数组的相关信息压栈。
 class NestedIterator {
 public:
 	NestedIterator(const vector<NestedInteger> &nestedList)
