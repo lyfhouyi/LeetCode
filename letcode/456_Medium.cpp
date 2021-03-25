@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<climits>
+#include<set>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-//暴力解法。预计算左侧最小值数组 minLeft 及右侧受限最大值数组 maxRight ；随后使用单指针遍历原始数组，利用左侧最小值数组 minLeft 及右侧受限最大值数组 maxRight 判断当前指向的数字能否为 132 模式子序列的中间值(j)；若 minLeft[x] < nums[x] && maxRight[x] > minLeft[x] 则 x 满足要求。
+//解法一：有序集合。预计算左侧最小值数组 minLeft 及右侧受限最大值数组 maxRight ；随后使用单指针遍历原始数组，利用左侧最小值数组 minLeft 及右侧受限最大值数组 maxRight 判断当前指向的数字能否为 132 模式子序列的中间值(j)；若 minLeft[x] < nums[x] && maxRight[x] > minLeft[x] 则 x 满足要求。
 bool find132pattern(vector<int>& nums)
 {
 	int n = nums.size();
@@ -31,21 +32,39 @@ bool find132pattern(vector<int>& nums)
 		return false;
 	vector<int> minLeft(n, INT_MAX); //左侧最小值数组（记录当前位置左侧的元素的最小值）
 	vector<int> maxRight(n, INT_MIN); //右侧受限最大值数组（记录当前位置右侧的小于当前元素的元素的最大值）
+	
 	for (int i = 1; i < n; i++) //预计算左侧最小值数组
 	{
 		minLeft[i] = minLeft[i - 1] < nums[i - 1] ? minLeft[i - 1] : nums[i - 1];
 	}
-	for (int i = 1; i < n; i++) //预计算右侧受限最大值数组
+
+	set<int,greater<int>> valueRight; //右侧数值集合
+	valueRight.insert(INT_MIN);
+	set<int>::iterator it;
+	for (int i = n - 1; i >=0; i--) //预计算右侧受限最大值数组
 	{
-		minLeft[i] = minLeft[i - 1] < nums[i - 1] ? minLeft[i - 1] : nums[i - 1];l
+		it = valueRight.upper_bound(nums[i]);
+		maxRight[i] = *it;
+		valueRight.insert(nums[i]);
+	}
+
+	for (int i = 1; i < n; i++) //查找满足 132 模式子序列的中间值
+	{
+		if (minLeft[i] < nums[i] && maxRight[i] > minLeft[i])
+			return true;
 	}
 	return false;
 }
 
 
+//解法二：单调栈。使用严格递减栈存储有可能成为 132 模式子序列的最右值(k)的元素值；单指针逆向遍历原始数组，若当前元素大于栈中元素，则栈中元素已可以成为 132 模式子序列的最右值(k)；使用 maxK 记录可以成为 132 模式子序列的最右值(k)的元素的最大值；若当前指向的元素值小于 maxK ，则找到了一个 132 模式子序列。
+
+
 int main()
 {
-	vector<int> test = { -1,3,2,0 };
+	//vector<int> test = { 5,3,3,4,1,3,2,7,1,1 };
+	vector<int> test = { 3,1,4,2 };
+	//vector<int> test = { -1,3,2,0 };
 	bool ret = find132pattern(test);
 	cout << "main：ret = " << ret << endl;
 	return 0;
