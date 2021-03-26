@@ -131,6 +131,7 @@
     <ClCompile Include="1052_Medium.cpp" />
     <ClCompile Include="1124_Medium.cpp" />
     <ClCompile Include="1128_Easy.cpp" />
+    <ClCompile Include="1143_Medium.cpp" />
     <ClCompile Include="115_Hard.cpp" />
     <ClCompile Include="1178_Hard.cpp" />
     <ClCompile Include="11_Medium.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="1584_Medium.cpp" />
     <ClCompile Include="1603_Easy.cpp" />
     <ClCompile Include="1631_Medium.cpp" />
+    <ClCompile Include="1713_Hard.cpp" />
     <ClCompile Include="188_Hard.cpp" />
     <ClCompile Include="189_Medium.cpp" />
     <ClCompile Include="191_Easy.cpp" />

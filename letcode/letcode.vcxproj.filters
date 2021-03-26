@@ -381,5 +381,11 @@
     <ClCompile Include="754_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="1713_Hard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="1143_Medium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

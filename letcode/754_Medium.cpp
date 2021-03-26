@@ -21,37 +21,70 @@ using namespace std;
 
 //暴力解法。枚举所有可达解，直到找到目标值。
 //算法正确，但时间超时。
+//int reachNumber(int target)
+//{
+//	vector<int> reachableDomain(1,0);
+//	int stepCnt = 1;
+//	int n;
+//	while (true)
+//	{
+//		n = reachableDomain.size();
+//		vector<int> reachableDomainNew;
+//		for (int i = 0; i < n; i++)
+//		{
+//			if (reachableDomain[i] + stepCnt == target)
+//				return stepCnt;
+//			else
+//				reachableDomainNew.push_back(reachableDomain[i] + stepCnt);
+//
+//			if (reachableDomain[i] - stepCnt == target)
+//				return stepCnt;
+//			else
+//				reachableDomainNew.push_back(reachableDomain[i] - stepCnt);
+//		}
+//		reachableDomain = reachableDomainNew;
+//		reachableDomainNew.clear();
+//		stepCnt++;
+//	}
+//	return 0;
+//}
+
+
+//解法一：数学分析。首先找到累加和足够大的 k ；随后判断累加和与目标值的差的奇偶性，当累加和与目标值之差为偶数时，只需将 k 中的某个值取负即可；当累加和与目标值之差为奇数时，需取到 k + 1 或 k + 2 使目累加和与目标值之差为偶数，并将累加和中的某个值取负即可。可以证明，当累加和与目标值之差为偶数时，存在且一定存在某个累加和元素，将其取负时可以达到目标值，且此时步数最少。
+//int reachNumber(int target)
+//{
+//	target = target > 0 ? target : -target;
+//	int s = 0;
+//	int k = 0;
+//	while (s < target)
+//	{
+//		k++;
+//		s += k;
+//	}
+//	int delta = s - target;
+//	int ret = k + delta % 2;
+//	if (delta % 2 == 1 && k % 2 == 1)
+//		ret++;
+//	return ret;
+//}
+
+
+//解法二：数学分析。逐个累加累加和，直到累加和大于或等于目标值，且累加和与目标值之差为偶数为止；此时只需将累加和与目标值之差的一半的那个累加和项取负即可得到目标值。可以证明，此时的步数最少。
 int reachNumber(int target)
 {
-	vector<int> reachableDomain;
-	reachableDomain.push_back(0);
-	int stepCnt = 1;
-	int n;
-	while (true)
+	target = target > 0 ? target : -target;
+	int s = 0;
+	int k = 0;
+	while (s < target || (s - target) % 2 == 1)
 	{
-		n = reachableDomain.size();
-		vector<int> reachableDomainNew;
-		for (int i = 0; i < n; i++)
-		{
-			if (reachableDomain[i] + stepCnt == target)
-				return stepCnt;
-			else
-				reachableDomainNew.push_back(reachableDomain[i] + stepCnt);
-
-			if (reachableDomain[i] - stepCnt == target)
-				return stepCnt;
-			else
-				reachableDomainNew.push_back(reachableDomain[i] - stepCnt);
-		}
-		reachableDomain = reachableDomainNew;
-		reachableDomainNew.clear();
-		stepCnt++;
+		k++;
+		s += k;
 	}
-	return 0;
+	return k;
 }
 
 
-int main()
+int main754()
 {
 	int ret = reachNumber(100000);
 	cout << "main：ret = " << ret << endl;
