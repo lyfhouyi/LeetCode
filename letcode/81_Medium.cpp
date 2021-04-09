@@ -28,8 +28,8 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-//二分查找。首先使用循环调整二分查找时 left 的值，随后在使用二分查找判断目标值位于左或右侧时，需按中点 mid 在其旋转中心左或者右分类讨论。
-bool search(vector<int>& nums, int target)
+//二分查找。首先使用循环调整二分查找时 left 的初始值，随后在使用二分查找判断目标值位于左或右侧时，需按中点 mid 在其旋转中心左或者右分类讨论。
+bool search81(vector<int>& nums, int target)
 {
 	int left = 0;
 	int right = nums.size() - 1;
@@ -61,7 +61,7 @@ int main81()
 
 	vector<int> test = { 1,0,1,1,1 };
 	//vector<int> test = { 2,5,6,0,0,1,2 };
-	bool ret = search(test, 0);
+	bool ret = search81(test, 0);
 	cout << "main：ret = " << ret << endl;
 	return 0;
 }

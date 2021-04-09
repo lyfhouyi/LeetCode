@@ -25,7 +25,7 @@ using namespace std;
 
 
 //二分查找。根据中点 mid 处的值与区间左端点的值的大小可确定区间最小值应出现在左侧或右侧。
-int findMin(vector<int>& nums)
+int findMin153(vector<int>& nums)
 {
 	int left = 0;
 	int right = nums.size() - 1;
@@ -53,7 +53,7 @@ int main153()
 	//vector<int> test = { 3,4,5,1,2 };
 	vector<int> test = { 11, 13, 15, 17 };
 	//vector<int> test = { 4,5,6,7,0,1,2 };
-	int ret = findMin(test);
+	int ret = findMin153(test);
 	cout << "main：ret = " << ret << endl;
 	return 0;
 }

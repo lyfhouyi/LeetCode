@@ -44,7 +44,7 @@ using namespace std;
 
 
 //解法二：二分查找。正序遍历数组。
-int search(vector<int>& nums, int target)
+int search33(vector<int>& nums, int target)
 {
 	int left = 0;
 	int right = nums.size() - 1;
@@ -79,7 +79,7 @@ int main33()
 	//vector<int> test = { 5,1,3 };
 	//vector<int> test = { 3,1 };
 	//vector<int> test = { 3,1 };
-	int ret = search(test, 0);
+	int ret = search33(test, 0);
 	cout << "main：ret = " << ret << endl;
 	return 0;
 }

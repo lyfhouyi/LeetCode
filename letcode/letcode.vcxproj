@@ -152,8 +152,10 @@
     <ClCompile Include="1489_Hard.cpp" />
     <ClCompile Include="1505_Hard.cpp" />
     <ClCompile Include="150_Medium.cpp" />
+    <ClCompile Include="1518_Easy.cpp" />
     <ClCompile Include="152_Medium.cpp" />
     <ClCompile Include="153_Medium.cpp" />
+    <ClCompile Include="154_Hard.cpp" />
     <ClCompile Include="1579_Hard.cpp" />
     <ClCompile Include="1584_Medium.cpp" />
     <ClCompile Include="1603_Easy.cpp" />
@@ -264,6 +266,7 @@
     <ClCompile Include="992_Hard.cpp" />
     <ClCompile Include="994_Medium.cpp" />
     <ClCompile Include="995_Hard.cpp" />
+    <ClCompile Include="M0506_Easy.cpp" />
     <ClCompile Include="M1721_Hard.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
