@@ -125,9 +125,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="1004_Medium.cpp" />
+    <ClCompile Include="1006_Medium.cpp" />
     <ClCompile Include="1018_Easy.cpp" />
     <ClCompile Include="1046_Easy.cpp" />
     <ClCompile Include="1047_Easy.cpp" />
+    <ClCompile Include="1051_Easy.cpp" />
     <ClCompile Include="1052_Medium.cpp" />
     <ClCompile Include="1124_Medium.cpp" />
     <ClCompile Include="1128_Easy.cpp" />
@@ -151,6 +153,7 @@
     <ClCompile Include="1505_Hard.cpp" />
     <ClCompile Include="150_Medium.cpp" />
     <ClCompile Include="152_Medium.cpp" />
+    <ClCompile Include="153_Medium.cpp" />
     <ClCompile Include="1579_Hard.cpp" />
     <ClCompile Include="1584_Medium.cpp" />
     <ClCompile Include="1603_Easy.cpp" />
@@ -158,21 +161,28 @@
     <ClCompile Include="1713_Hard.cpp" />
     <ClCompile Include="188_Hard.cpp" />
     <ClCompile Include="189_Medium.cpp" />
+    <ClCompile Include="190_Easy.cpp" />
     <ClCompile Include="191_Easy.cpp" />
     <ClCompile Include="1_Easy.cpp" />
     <ClCompile Include="206_Easy.cpp" />
+    <ClCompile Include="20_Easy.cpp" />
     <ClCompile Include="224_Hard.cpp" />
     <ClCompile Include="227_Medium.cpp" />
     <ClCompile Include="228_Easy.cpp" />
+    <ClCompile Include="22_Medium.cpp" />
     <ClCompile Include="232_Easy.cpp" />
     <ClCompile Include="239_Hard.cpp" />
+    <ClCompile Include="26_Easy.cpp" />
     <ClCompile Include="295_Hard.cpp" />
     <ClCompile Include="2_Medium.cpp" />
     <ClCompile Include="300_Medium.cpp" />
+    <ClCompile Include="301_Hard.cpp" />
     <ClCompile Include="303_Easy.cpp" />
     <ClCompile Include="304_Medium.cpp" />
+    <ClCompile Include="307_Medium.cpp" />
     <ClCompile Include="330_Hard.cpp" />
     <ClCompile Include="338_Medium.cpp" />
+    <ClCompile Include="33_Medium.cpp" />
     <ClCompile Include="341_Medium.cpp" />
     <ClCompile Include="354_Hard.cpp" />
     <ClCompile Include="36_Medium.cpp" />
@@ -204,6 +214,7 @@
     <ClCompile Include="59_Medium.cpp" />
     <ClCompile Include="5_Medium.cpp" />
     <ClCompile Include="605_Easy.cpp" />
+    <ClCompile Include="61_Medium.cpp" />
     <ClCompile Include="628_Easy.cpp" />
     <ClCompile Include="643_Easy.cpp" />
     <ClCompile Include="647_Medium.cpp" />
@@ -215,6 +226,7 @@
     <ClCompile Include="6_Medium.cpp" />
     <ClCompile Include="705_Easy.cpp" />
     <ClCompile Include="706_Easy.cpp" />
+    <ClCompile Include="718_Medium.cpp" />
     <ClCompile Include="721_Medium.cpp" />
     <ClCompile Include="724_Easy.cpp" />
     <ClCompile Include="73_Medium.cpp" />
@@ -224,8 +236,11 @@
     <ClCompile Include="766_Easy.cpp" />
     <ClCompile Include="778_Hard.cpp" />
     <ClCompile Include="779_Medium.cpp" />
+    <ClCompile Include="781_Medium.cpp" />
     <ClCompile Include="78_Medium.cpp" />
     <ClCompile Include="7_Easy.cpp" />
+    <ClCompile Include="80_Medium.cpp" />
+    <ClCompile Include="81_Medium.cpp" />
     <ClCompile Include="825_Medium.cpp" />
     <ClCompile Include="827_Hard.cpp" />
     <ClCompile Include="82_Medium.cpp" />
@@ -247,7 +262,9 @@
     <ClCompile Include="989_Easy.cpp" />
     <ClCompile Include="990_Medium.cpp" />
     <ClCompile Include="992_Hard.cpp" />
+    <ClCompile Include="994_Medium.cpp" />
     <ClCompile Include="995_Hard.cpp" />
+    <ClCompile Include="M1721_Hard.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

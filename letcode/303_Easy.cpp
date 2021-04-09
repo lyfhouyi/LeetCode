@@ -23,9 +23,10 @@ using namespace std;
 
 
 //通过预计算的前缀和数组在 O(1) 的时间复杂度内计算原数组的范围和。
-class NumArray {
+class NumArray303
+{
 public:
-	NumArray(vector<int>& nums)
+	NumArray303(vector<int>& nums)
 	{
 		sumArray.push_back(0);
 		int n = nums.size();
@@ -48,7 +49,7 @@ int main303()
 {
 	vector<int> test = { 2, 3, 6, 7, 9 };
 	//vector<int> nums = { -2, 0, 3, -5, 2, -1 };
-	NumArray* obj = new NumArray(test);
+	NumArray303* obj = new NumArray303(test);
 	int ret = obj->sumRange(0, 2);
 	cout << "main：ret = " << ret;
 	return 0;
