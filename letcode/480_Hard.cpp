@@ -31,7 +31,6 @@ vector<double> medianSlidingWindow(vector<int>& nums, int k)
 	vector<double> median(n - k + 1);
 	multiset<double> bigSide; //大于中位数的 multiset（小顶堆）
 	multiset<double,greater<double>> littleSide; //小于中位数的 multiset（大顶堆）
-	int tmpValue;
 
 	//第一个滑动窗口
 	vector<int> tmp(nums.begin(), nums.begin() + k);

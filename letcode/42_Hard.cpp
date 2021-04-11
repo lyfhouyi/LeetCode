@@ -118,8 +118,6 @@ int trap(vector<int>& height)
 	stack<int> wallStack;
 	//遍历数组。以 i 位置为右壁
 	int topIndex;
-	int dist;
-	int heightDiff;
 	for (int i = 0; i < n; i++)
 	{
 		while (!wallStack.empty() && height[wallStack.top()] < height[i])
