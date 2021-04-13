@@ -39,22 +39,47 @@ void myInfixSearch(TreeNode783* root, vector<int>& valueVec)
 }
 
 
-//中序遍历。深度优先搜索。
-int minDiffInBST(TreeNode783* root)
+void myInfixSearch_pro(TreeNode783* root, int& preValue, int& ret)
 {
-	vector<int> valueVec;
-	myInfixSearch(root, valueVec);
-	int n = valueVec.size();
-	int ret = INT_MAX;
-	for (int i = 0; i + 1 < n; i++)
+	if (root == nullptr)
+		return;
+	myInfixSearch_pro(root->left, preValue, ret); //左侧节点的前缀值依旧是 preValue
+	if (preValue == -1)
+		preValue = root->val;
+	else
 	{
-		ret = valueVec[i + 1] - valueVec[i] < ret ? valueVec[i + 1] - valueVec[i] : ret;
+		ret = root->val - preValue < ret ? root->val - preValue : ret;
+		preValue = root->val;
 	}
-	return ret;
+	myInfixSearch_pro(root->right, preValue, ret); //右侧节点的前缀值初始是 root->val
 }
 
 
-int main()
+//中序遍历。首先使用深度优先搜索求出原根节点的中序遍历数组（该数组一定是升序的）；随后遍历中序遍历数组一次，计算差值的最小值。
+//int minDiffInBST(TreeNode783* root)
+//{
+//	vector<int> valueVec;
+//	myInfixSearch(root, valueVec);
+//	int n = valueVec.size();
+//	int ret = INT_MAX;
+//	for (int i = 0; i + 1 < n; i++)
+//	{
+//		ret = valueVec[i + 1] - valueVec[i] < ret ? valueVec[i + 1] - valueVec[i] : ret;
+//	}
+//	return ret;
+//}
+
+
+//优化。在中序遍历的过程中，维护前缀节点值并使用前缀节点值计算差值最小值。
+int minDiffInBST(TreeNode783* root)
+{
+	int ret = INT_MAX;
+	int preValue = -1;
+	myInfixSearch_pro(root, preValue, ret);
+	return ret;
+}
+
+int main783()
 {
 	TreeNode783* root = new TreeNode783(4);
 	root->left = new TreeNode783(2);
