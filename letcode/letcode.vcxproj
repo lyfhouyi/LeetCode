@@ -243,6 +243,7 @@
     <ClCompile Include="778_Hard.cpp" />
     <ClCompile Include="779_Medium.cpp" />
     <ClCompile Include="781_Medium.cpp" />
+    <ClCompile Include="783_Easy.cpp" />
     <ClCompile Include="78_Medium.cpp" />
     <ClCompile Include="7_Easy.cpp" />
     <ClCompile Include="80_Medium.cpp" />
