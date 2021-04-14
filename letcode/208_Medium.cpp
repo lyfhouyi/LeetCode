@@ -1,6 +1,6 @@
 ﻿#include<iostream>
-#include<set>
 #include<vector>
+#include<set>
 
 using namespace std;
 
@@ -115,7 +115,7 @@ private:
 };
 
 
-int main()
+int main208()
 {
 	Trie* obj = new Trie();
 	//obj->insert("lpfhouyi");
