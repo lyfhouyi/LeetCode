@@ -58,10 +58,10 @@ using namespace std;
 
 
 //前缀树（Trie）。
-class Trie {
+class Trie208 {
 public:
 	/** Initialize your data structure here. */
-	Trie() :isEnd(false), charVec(26,nullptr)
+	Trie208() :isEnd(false), charVec(26,nullptr)
 	{
 
 	}
@@ -69,11 +69,11 @@ public:
 	/** Inserts a word into the trie. */
 	void insert(string word)
 	{
-		Trie* node = this;
+		Trie208* node = this;
 		for (string::iterator it=word.begin();it!=word.end();it++)
 		{
 			if (node->charVec[*it - 'a'] == nullptr)
-				node->charVec[*it - 'a'] = new Trie;
+				node->charVec[*it - 'a'] = new Trie208;
 			node = node->charVec[*it - 'a'];
 		}
 		//此时 node 节点指向 word 单词的最后一个字母
@@ -84,7 +84,7 @@ public:
 	/** Returns if the word is in the trie. */
 	bool search(string word)
 	{
-		Trie* node = this;
+		Trie208* node = this;
 		for (string::iterator it = word.begin(); it != word.end(); it++)
 		{
 			if (node->charVec[*it - 'a'] == nullptr)
@@ -98,7 +98,7 @@ public:
 	/** Returns if there is any word in the trie that starts with the given prefix. */
 	bool startsWith(string prefix)
 	{
-		Trie* node = this;
+		Trie208* node = this;
 		for (string::iterator it = prefix.begin(); it != prefix.end(); it++)
 		{
 			if (node->charVec[*it - 'a'] == nullptr)
@@ -110,14 +110,14 @@ public:
 	}
 private:
 	bool isEnd; //当前节点是否为词尾
-	vector<Trie*> charVec; //孩子数组（存储当前节点的后缀节点）
+	vector<Trie208*> charVec; //孩子数组（存储当前节点的后缀节点）
 	string endWord; //本例中非必须
 };
 
 
 int main208()
 {
-	Trie* obj = new Trie();
+	Trie208* obj = new Trie208();
 	//obj->insert("lpfhouyi");
 	obj->insert("abc");
 	//obj->insert("");

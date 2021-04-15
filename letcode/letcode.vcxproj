@@ -166,10 +166,12 @@
     <ClCompile Include="189_Medium.cpp" />
     <ClCompile Include="190_Easy.cpp" />
     <ClCompile Include="191_Easy.cpp" />
+    <ClCompile Include="198_Medium.cpp" />
     <ClCompile Include="1_Easy.cpp" />
     <ClCompile Include="206_Easy.cpp" />
     <ClCompile Include="208_Medium.cpp" />
     <ClCompile Include="20_Easy.cpp" />
+    <ClCompile Include="213_Medium.cpp" />
     <ClCompile Include="224_Hard.cpp" />
     <ClCompile Include="227_Medium.cpp" />
     <ClCompile Include="228_Easy.cpp" />
