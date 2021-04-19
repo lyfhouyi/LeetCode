@@ -80,7 +80,7 @@ bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t)
 //解法二：滑动窗口。使用双指针构造滑动窗口，使用桶维护窗口内的元素；在窗口滑动的过程中判断窗口外右侧元素加入时能否满足题意。
 //bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t)
 //{
-//	unordered_map<int, long> ValueBucket;
+//	unordered_map<int, long> ValueBucket; //使用无序哈希表作为桶，将桶编号映射到桶内存储元素的值
 //	int n = nums.size();
 //	int indexLeft = 0;
 //	int indexRight = 0;
