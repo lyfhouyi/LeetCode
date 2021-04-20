@@ -77,50 +77,60 @@ void myLDR(TreeNode94* root, vector<int>& vec)
 
 
 //解法二，代码优化：迭代。首先将根节点及左枝节点依次压栈；随后将栈中节点逐个弹出并输出元素值，输出元素值后，将当前节点右枝节点及其左枝节点依次压栈；当栈为空时，所有节点已遍历完毕。
+//vector<int> inorderTraversal(TreeNode94* root)
+//{
+//	vector<int> ret;
+//	stack<TreeNode94*> nodeStack;
+//	TreeNode94* node = root;
+//	while (!nodeStack.empty() || node != nullptr)
+//	{
+//		while (node != nullptr) //将当前节点及其左枝节点依次压栈（当前节点的左枝节点的右枝节点会在该节点出栈后的压栈阶段压入栈中）
+//		{
+//			nodeStack.push(node);
+//			node = node->left;
+//		}
+//		node = nodeStack.top();
+//		nodeStack.pop();
+//		ret.push_back(node->val);
+//		node = node->right;
+//	}
+//	return ret;
+//}
+
+
+//解法三：Morris 算法。对任意节点，使用其前缀节点的右指针的状态作为其左子树（前缀节点及其之前的节点）是否已被输出的标志（前缀节点的右指针为空时，说明左子树尚未被完全输出；前缀节点为空时，说明当前节点无左子树；前缀节点的右指针非空（若非空，则必等于当前节点）时，说明当前节点已是第二次被访问，因此当前节点的左子树必已被完全输出）。若当前节点无左子树或左子树已被输出，则应输出当前节点，并将当前节点置为当前节点的右节点；若当前节点有左子树且左子树尚未被完全输出，则应将前缀节点的右节点置为当前节点，并当前节点置为当前节点的左节点。
 vector<int> inorderTraversal(TreeNode94* root)
 {
 	vector<int> ret;
-	stack<TreeNode94*> nodeStack;
 	TreeNode94* node = root;
-	while (!nodeStack.empty() || node != nullptr)
+	TreeNode94* preNode;
+	while (node != nullptr)
 	{
-		while (node != nullptr) //将当前节点及其左枝节点依次压栈（当前节点的左枝节点的右枝节点会在该节点出栈后的压栈阶段压入栈中）
-		{
-			nodeStack.push(node);
-			node = node->left;
-		}
-		node = nodeStack.top();
-		nodeStack.pop();
-		ret.push_back(node->val);
-		node = node->right;
-	}
-	return ret;
-}
-Morris
+		//找到当前节点的前缀节点
+		preNode = node->left;
+		while (preNode != nullptr && preNode->right != nullptr && preNode->right != node)
+			preNode = preNode->right;
 
-//解法三：Morris 算法。对任意节点，使用其前缀节点的右指针的状态作为其左子树（前缀节点及其之前的节点）是否已被输出的标志（前缀节点的右指针为空时，说明左子树尚未被完全输出；前缀节点的右指针非空时，说明当前节点已是第二次被访问，因此当前节点的左子树必已被完全输出）。若当前节点的左子树已被输出，则应输出当前节点，并将当前节点置为当前节点的右节点；若当前节点的左子树尚未被完全输出，则应将当前节点置为当前节点的左节点。
-vector<int> inorderTraversal(TreeNode94* root)
-{
-	vector<int> ret;
-	stack<TreeNode94*> nodeStack;
-	TreeNode94* node = root;
-	while (!nodeStack.empty() || node != nullptr)
-	{
-		while (node != nullptr) //将当前节点及其左枝节点依次压栈（当前节点的左枝节点的右枝节点会在该节点出栈后的压栈阶段压入栈中）
+		if (preNode == nullptr || preNode->right == node) //当前节点无左子树或左子树已被输出
 		{
-			nodeStack.push(node);
+			ret.push_back(node->val);
+			node = node->right;
+
+			//恢复树结构
+			if (preNode != nullptr)
+				preNode->right = nullptr;
+		}
+		else //当前节点有左子树且左子树尚未被完全输出
+		{
+			preNode->right = node;
 			node = node->left;
 		}
-		node = nodeStack.top();
-		nodeStack.pop();
-		ret.push_back(node->val);
-		node = node->right;
 	}
 	return ret;
 }
 
 
-int main()
+int main94()
 {
 	//TreeNode94* root = new TreeNode94(4);
 	//root->left = new TreeNode94(2);
