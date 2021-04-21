@@ -148,6 +148,7 @@
     <ClCompile Include="1404_Medium.cpp" />
     <ClCompile Include="1423_Medium.cpp" />
     <ClCompile Include="1438_Medium.cpp" />
+    <ClCompile Include="144_Medium.cpp" />
     <ClCompile Include="1463_Hard.cpp" />
     <ClCompile Include="1489_Hard.cpp" />
     <ClCompile Include="1505_Hard.cpp" />
