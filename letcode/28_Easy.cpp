@@ -41,7 +41,7 @@ int strStr(string haystack, string needle)
 }
 
 
-int main()
+int main28()
 {
 	string haystack = "";
 	string needle = "";
