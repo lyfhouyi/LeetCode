@@ -50,28 +50,84 @@ void myDLR(TreeNode144* root, vector<int>& vec)
 
 
 //解法二：迭代。首先将跟节点压栈；随后将将栈中节点逐个弹出并输出元素值，输出元素值后，将当前节点的右节点及左节点压栈；当栈为空时，所有节点已遍历完毕。
+//vector<int> preorderTraversal(TreeNode144* root)
+//{
+//	vector<int> ret;
+//	stack<TreeNode144*> nodeStack;
+//	if (root != nullptr)
+//		nodeStack.push(root);
+//	TreeNode144* node;
+//	while (!nodeStack.empty())
+//	{
+//		node = nodeStack.top();
+//		ret.push_back(node->val);
+//		nodeStack.pop();
+//		if (node->right != nullptr)
+//			nodeStack.push(node->right);
+//		if (node->left != nullptr)
+//			nodeStack.push(node->left);
+//	}
+//	return ret;
+//}
+
+
+//解法三：Morris 算法。对任意节点，使用其前缀节点的右指针的状态作为其左子树（前缀节点及其之前的节点）是否已被输出的标志（前缀节点的右指针为空时，说明左子树尚未被完全输出；前缀节点为空时，说明当前节点无左子树；前缀节点的右指针非空（若非空，则必等于当前节点）时，说明当前节点已是第二次被访问，因此当前节点的左子树必已被完全输出）。若当前节点无左子树则应输出当前节点，并将当前节点置为当前节点的右节点；若当前节点有左子树且左子树尚未被完全输出，则应输出当前节点，并将前缀节点的右节点置为当前节点，并将当前节点置为当前节点的左节点；若当前节点有左子树且左子树已被完全输出，则应将当前节点置为当前节点的右节点。
+//vector<int> preorderTraversal(TreeNode144* root)
+//{
+//	vector<int> ret;
+//	TreeNode144* node = root;
+//	TreeNode144* preNode;
+//	while (node != nullptr)
+//	{
+//		//找到当前节点的前缀节点
+//		preNode = node->left;
+//		while (preNode != nullptr && preNode->right != nullptr && preNode->right != node)
+//			preNode = preNode->right;
+//
+//		if (preNode == nullptr) //当前节点无左子树
+//		{
+//			ret.push_back(node->val);
+//			node = node->right;
+//		}
+//		else if (preNode->right == nullptr) //当前节点有左子树且左子树尚未被完全输出
+//		{
+//			ret.push_back(node->val);
+//			preNode->right = node;
+//			node = node->left;
+//		}
+//		else //当前节点有左子树且左子树已被完全输出
+//		{
+//			preNode->right = nullptr; //恢复树结构
+//			node = node->right;
+//		}
+//	}
+//	return ret;
+//}
+
+
+//解法四：迭代。首先将根节点及左枝节点依次输出元素值并压栈；随后将栈中节点逐个弹出，并将当前节点右枝节点及其左枝节点依次输出元素值并压栈；当栈为空时，所有节点已遍历完毕。
 vector<int> preorderTraversal(TreeNode144* root)
 {
 	vector<int> ret;
 	stack<TreeNode144*> nodeStack;
-	if (root != nullptr)
-		nodeStack.push(root);
-	TreeNode144* node;
-	while (!nodeStack.empty())
+	TreeNode144* node = root;
+	while (!nodeStack.empty() || node != nullptr)
 	{
+		while (node != nullptr)
+		{
+			ret.push_back(node->val);
+			nodeStack.push(node);
+			node = node->left;
+		}
 		node = nodeStack.top();
-		ret.push_back(node->val);
 		nodeStack.pop();
-		if (node->right != nullptr)
-			nodeStack.push(node->right);
-		if(node->left != nullptr)
-			nodeStack.push(node->left);
+		node = node->right;
 	}
 	return ret;
 }
 
 
-int main()
+int main144()
 {
 	//TreeNode144* root = new TreeNode144(4);
 	//root->left = new TreeNode144(2);

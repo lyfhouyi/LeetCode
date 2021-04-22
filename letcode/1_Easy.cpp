@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 #include<vector>
+#include<unordered_map>
 
 using namespace std;
 
@@ -22,23 +23,37 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
+//解法一：暴力遍历。双指针暴力遍历原始数组，直到找到满足要求的元素对。
+//vector<int> twoSum(vector<int>& nums, int target)
+//{
+//	int i, j;
+//	for (i = 0; i < nums.size(); i++)
+//	{
+//		for (j = i + 1; j < nums.size(); j++)
+//		{
+//			if (nums[i] + nums[j] == target)
+//			{
+//				return { i,j };
+//			}
+//
+//		}
+//	}
+//	return { i,j };
+//}
 
-//双指针遍历
+
+//解法二：无序哈希表。单指针遍历原始数组，将已遍历过的元素存入无序哈希表；对遍历到的任一元素，检查哈希表中是否包含满足要求的另一元素。
 vector<int> twoSum(vector<int>& nums, int target)
 {
-	int i, j;
-	for (i = 0; i < nums.size(); i++)
+	unordered_map<int, int> valueMap;
+	unordered_map<int, int>::iterator it;
+	for (int i = 0; i < nums.size(); i++)
 	{
-		for (j = i + 1; j < nums.size(); j++)
-		{
-			if (nums[i] + nums[j] == target)
-			{
-				return { i,j };
-			}
-
-		}
+		if ((it = valueMap.find(target - nums[i])) != valueMap.end())
+			return { i,it->second };
+		valueMap.insert(make_pair(nums[i], i));
 	}
-	return { i,j };
+	return { 0,0 };
 }
 
 
@@ -46,6 +61,6 @@ int main1()
 {
 	vector<int> test1 = { 3,2,4 };
 	vector<int> ret = twoSum(test1, 6);
-	cout << "main：ret = ["<<ret[0]<<","<<ret[1]<<"]"<<endl;
+	cout << "main：ret = [" << ret[0] << "," << ret[1] << "]" << endl;
 	return 0;
 }
