@@ -41,7 +41,7 @@ vector<vector<int>> combine(int n, int k)
 }
 
 
-int main()
+int main77()
 {
 	vector<vector<int>> ret = combine(4, 2);
 	cout << "main£ºret = " << endl;

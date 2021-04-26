@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="1004_Medium.cpp" />
     <ClCompile Include="1006_Medium.cpp" />
+    <ClCompile Include="1011_Medium.cpp" />
     <ClCompile Include="1018_Easy.cpp" />
     <ClCompile Include="1046_Easy.cpp" />
     <ClCompile Include="1047_Easy.cpp" />

@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 #include<string>
+#include<vector>
 
 using namespace std;
 
@@ -25,17 +26,62 @@ using namespace std;
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-//暴力遍历。在 haystack 中逐位置取出与 needle 等长的子串，比较二者是否相等。
+//解法一：暴力遍历。在 haystack 中逐位置取出与 needle 等长的子串，比较二者是否相等。
+//int strStr(string haystack, string needle)
+//{
+//	int n = haystack.length();
+//	int m = needle.length();
+//	if (m == 0)
+//		return 0;
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (haystack.substr(i, m) == needle)
+//			return i;
+//	}
+//	return -1;
+//}
+
+
+//解法二：KMP 算法。首先计算模式串 needle 的部分匹配表；随后使用 next 数组辅助匹配。
 int strStr(string haystack, string needle)
 {
-	int n = haystack.length();
+	//计算模式串 needle 的部分匹配表，next[i] 表示子串 needle[0:i] 的最长相等前后缀长度
 	int m = needle.length();
+	vector<int> next(m, 0);
+	int j = 0; //每次迭代计算 next[i] 时，j 的初始值均表示子串 needle[0:i - 1] 的最长相等前后缀长度，即初始状态 j == next[i - 1]
+	for (int i = 1; i < m; i++)
+	{
+		while (j > 0 && needle[i] != needle[j])
+		{
+			j = next[j - 1];
+		}
+		if (needle[i] == needle[j])
+			j++;
+		next[i] = j;
+	}
+
 	if (m == 0)
 		return 0;
-	for (int i = 0; i < n; i++)
+	//匹配模式串
+	int n = haystack.length();
+	int i = 0;
+	j = 0;
+	while (i < n)
 	{
-		if (haystack.substr(i, m) == needle)
-			return i;
+		if (haystack[i] == needle[j])
+		{
+			i++;
+			j++;
+			if (j == m) //匹配完成，找到模式串
+				return i - m;
+		}
+		else
+		{
+			if (j > 0)
+				j = next[j - 1];
+			else
+				i++;
+		}
 	}
 	return -1;
 }
@@ -43,8 +89,8 @@ int strStr(string haystack, string needle)
 
 int main28()
 {
-	string haystack = "";
-	string needle = "";
+	string haystack = "aabaabaaf";
+	string needle = "aabaaf";
 	int ret = strStr(haystack, needle);
 	cout << "main：ret = " << ret << endl;
 	return 0;
