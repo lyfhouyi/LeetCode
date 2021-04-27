@@ -199,6 +199,7 @@
     <ClCompile Include="338_Medium.cpp" />
     <ClCompile Include="33_Medium.cpp" />
     <ClCompile Include="341_Medium.cpp" />
+    <ClCompile Include="34_Medium.cpp" />
     <ClCompile Include="354_Hard.cpp" />
     <ClCompile Include="363_Hard.cpp" />
     <ClCompile Include="368_Medium.cpp" />
