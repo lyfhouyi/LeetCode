@@ -26,39 +26,90 @@ using namespace std;
 //状态转移函数：dp[i][j] = min(max(dp[i - 1][x - 1],sum(weights[x:j]))) ，其中 x ∈ [0,j]
 //边界条件：dp[0][j] = sum(weights[0:j]) 。
 //最优解：dp[D-1][n-1] 。
-int shipWithinDays(vector<int>& weights, int D)
+//算法正确，但时间超时。
+//int shipWithinDays(vector<int>& weights, int D)
+//{
+//	int n = weights.size();
+//	vector<vector<int>> dp(D, vector<int>(n, INT_MAX));
+//	dp[0][0] = weights[0];
+//	for (int j = 1; j < n; j++)
+//		dp[0][j] = dp[0][j - 1] + weights[j];
+//	int currentCapacity;
+//	for (int i = 1; i < D; i++)
+//	{
+//		for (int j = i; j < n; j++)
+//		{
+//			int lastDay = 0;
+//			for (int tmpIndex = j; tmpIndex > 0; tmpIndex--)
+//			{
+//				lastDay += weights[tmpIndex];
+//				currentCapacity = dp[i - 1][tmpIndex - 1] > lastDay ? dp[i - 1][tmpIndex - 1] : lastDay;
+//				dp[i][j] = dp[i][j] < currentCapacity ? dp[i][j] : currentCapacity;
+//				if (lastDay >= dp[i - 1][tmpIndex - 1]) //剪枝：最后一天的运载量过大时，可以提前退出循环，因为后面的 currentCapacity 只会更大
+//					break;
+//			}
+//		}
+//	}
+//	return dp[D - 1][n - 1];
+//}
+
+
+//判断在给定运载量下，能否在 D 天内将传送带上的所有包裹送达
+bool canShipWithinDays(vector<int>& weights, int D, int capacity)
 {
 	int n = weights.size();
-	vector<vector<int>> dp(D, vector<int>(n, INT_MAX));
-	dp[0][0] = weights[0];
-	for (int j = 1; j < n; j++)
-		dp[0][j] = dp[0][j - 1] + weights[j];
-	int currentCapacity;
-	for (int i = 1; i < D; i++)
+	int dayCnt = 1;
+	int dayValue = 0;
+	for (int i = 0; i < n; i++)
 	{
-		for (int j = i; j < n; j++)
+		dayValue += weights[i];
+		if (dayValue > capacity)
 		{
-			int lastDay = 0;
-			for (int tmpIndex = j; tmpIndex > 0; tmpIndex--)
-			{
-				lastDay += weights[tmpIndex];
-				currentCapacity = dp[i - 1][tmpIndex - 1] > lastDay ? dp[i - 1][tmpIndex - 1] : lastDay;
-				dp[i][j] = dp[i][j] < currentCapacity ? dp[i][j] : currentCapacity;
-				if (lastDay >= dp[i - 1][tmpIndex - 1]) //剪枝：最后一天的运载量过大时，可以提前退出循环，因为后面的 currentCapacity 只会更大
-					break;
-			}
+			dayValue = weights[i];
+			dayCnt++;
 		}
+		if (dayCnt > D)
+			return false;
 	}
-	return dp[D - 1][n - 1];
+	return true;
 }
 
 
-int main()
+//二分查找。在值域内使用二分查找法找到最小的运载能力值（目标值）；值域为 [weights 元素最大值,weights 元素总和]；对查找的任意值（运载能力），遍历 weights 数组一次，若在该运载能力下需要的送达天数大于 D ，则运载能力应严格更大，否则运载能力应更小。
+int shipWithinDays(vector<int>& weights, int D)
 {
-	vector<int> test = { 1,2,3,4,5,6,7,8,9,10 };
+	int n = weights.size();
+	int left = 0;
+	int right = 0;
+	for (int i = 0; i < n; i++)
+	{
+		left = left > weights[i] ? left : weights[i];
+		right += weights[i];
+	}
+	int mid;
+	while (left < right) //二分查找：查找区域 [left,right]
+	{
+		mid = (left + right) / 2;
+		if (canShipWithinDays(weights, D, mid)) //目标值只能位于 [left,mid] 中
+		{
+			right = mid;
+		}
+		else //目标值只能位于 [mid,right] 中
+		{
+			left = mid + 1;
+		}
+	}
+	return left;
+}
+
+
+int main1011()
+{
+	//vector<int> test = { 1,2,3,4,5,6,7,8,9,10 };
 	//vector<int> test = { 1,2,3,1,1 };
+	vector<int> test = { 3 };
 	//vector<int> test = { 3,2,2,4,1,4};
-	int ret = shipWithinDays(test, 5);
+	int ret = shipWithinDays(test, 1);
 	cout << "main：ret = " << ret << endl;
 	return 0;
 }

@@ -522,5 +522,8 @@
     <ClCompile Include="1011_Medium.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="938_Easy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

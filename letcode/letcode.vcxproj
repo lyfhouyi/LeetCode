@@ -281,6 +281,7 @@
     <ClCompile Include="8_Medium.cpp" />
     <ClCompile Include="91_Medium.cpp" />
     <ClCompile Include="92_Medium.cpp" />
+    <ClCompile Include="938_Easy.cpp" />
     <ClCompile Include="947_Medium.cpp" />
     <ClCompile Include="94_Medium.cpp" />
     <ClCompile Include="959_Medium.cpp" />
