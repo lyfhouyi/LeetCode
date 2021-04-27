@@ -49,7 +49,7 @@ using namespace std;
 //}
 
 
-//解法二：二分查找。分别使用二分查找法找到目标值出现的第一个及最后一个位置索引。
+//解法二：二分查找。使用二分查找法分别找到目标值出现的第一个及最后一个位置索引。
 vector<int> searchRange(vector<int>& nums, int target)
 {
 	vector<int> ret(2, -1);
@@ -90,7 +90,7 @@ vector<int> searchRange(vector<int>& nums, int target)
 }
 
 
-int main()
+int main34()
 {
 	//vector<int> test = { 8,8,8,8,8,8,9 };
 	vector<int> test = { };

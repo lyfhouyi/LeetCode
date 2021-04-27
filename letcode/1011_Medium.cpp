@@ -94,7 +94,7 @@ int shipWithinDays(vector<int>& weights, int D)
 		{
 			right = mid;
 		}
-		else //目标值只能位于 [mid,right] 中
+		else //目标值只能位于 [mid + 1,right] 中
 		{
 			left = mid + 1;
 		}

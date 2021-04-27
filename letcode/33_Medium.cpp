@@ -60,7 +60,7 @@ int search33(vector<int>& nums, int target)
 		{
 			right = mid;
 		}
-		else
+		else //目标值只能位于 [mid + 1,right] 中
 		{
 			left = mid + 1;
 		}
