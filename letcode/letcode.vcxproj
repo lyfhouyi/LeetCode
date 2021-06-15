@@ -146,6 +146,8 @@
     <ClCompile Include="131_Medium.cpp" />
     <ClCompile Include="132_Hard.cpp" />
     <ClCompile Include="134_Medium.cpp" />
+    <ClCompile Include="136_Easy.cpp" />
+    <ClCompile Include="137_Medium.cpp" />
     <ClCompile Include="1404_Medium.cpp" />
     <ClCompile Include="1423_Medium.cpp" />
     <ClCompile Include="1438_Medium.cpp" />
