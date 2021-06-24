@@ -44,7 +44,7 @@ int singleNumber(vector<int>& nums)
 //}
 
 
-int main()
+int main136()
 {
 	vector<int> test = { 4,1,2,1,2 };
 	int ret = singleNumber(test);
