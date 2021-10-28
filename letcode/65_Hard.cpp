@@ -59,7 +59,7 @@ bool isNumber(string s)
 }
 
 
-int main()
+int main65()
 {
 	string test = "+Inf";
 	bool ret = isNumber(test);

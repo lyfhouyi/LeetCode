@@ -303,6 +303,7 @@
     <ClCompile Include="992_Hard.cpp" />
     <ClCompile Include="994_Medium.cpp" />
     <ClCompile Include="995_Hard.cpp" />
+    <ClCompile Include="io.cpp" />
     <ClCompile Include="M0506_Easy.cpp" />
     <ClCompile Include="M1721_Hard.cpp" />
   </ItemGroup>
