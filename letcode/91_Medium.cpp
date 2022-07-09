@@ -1,6 +1,6 @@
-﻿#include<iostream>
-#include<vector>
-#include<string>
+﻿#include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -30,9 +30,8 @@ using namespace std;
 //链接：https ://leetcode-cn.com/problems/decode-ways
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-
 //回溯算法。根据当前待解码串 encodedS 的前两个字符的情况判断下一步可以解码哪个字符。回溯于 encodedS 下一步解码的字符是 1-9 或 10-26 ；递归基：待解码串为空时，即找到一个解码方案。
-void decode(string encodedS, int& currentCnt)
+void decode(string encodedS, int &currentCnt)
 {
 	if (encodedS.length() == 0)
 	{
@@ -47,16 +46,14 @@ void decode(string encodedS, int& currentCnt)
 		decode(encodedS.substr(2), currentCnt);
 }
 
-
 //递归。递归调用 decode() 函数，解码下一个的字符。
 //算法正确，但时间超时。
-//int numDecodings(string s)
+// int numDecodings(string s)
 //{
 //	int ret = 0;
 //	decode(s, ret);
 //	return ret;
 //}
-
 
 //一维动态规划。维护一个一维数组：dp[i] 表示 [0,i] 区间的原字符串的解码方案数。
 //状态转移函数：dp[i] = ([i-1,i] 区间的原字符串可以解码 ? dp[i - 2] : 0) + ([i,i] 区间的原字符串可以解码 ? dp[i - 1] : 0) 。
@@ -79,7 +76,6 @@ int numDecodings(string s)
 	}
 	return dp[n - 1];
 }
-
 
 int main91()
 {

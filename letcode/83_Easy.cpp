@@ -1,12 +1,12 @@
-#include<iostream>
+ï»¿#include<iostream>
 
 using namespace std;
 
-//¸ø¶¨Ò»¸öÅÅÐòÁ´±í£¬É¾³ýËùÓÐÖØ¸´µÄÔªËØ£¬Ê¹µÃÃ¿¸öÔªËØÖ»³öÏÖÒ»´Î¡£
+//ç»™å®šä¸€ä¸ªæŽ’åºé“¾è¡¨ï¼Œåˆ é™¤æ‰€æœ‰é‡å¤çš„å…ƒç´ ï¼Œä½¿å¾—æ¯ä¸ªå…ƒç´ åªå‡ºçŽ°ä¸€æ¬¡ã€‚
 //
-//À´Ô´£ºÁ¦¿Û£¨LeetCode£©
-//Á´½Ó£ºhttps ://leetcode-cn.com/problems/remove-duplicates-from-sorted-list
-//Öø×÷È¨¹éÁì¿ÛÍøÂçËùÓÐ¡£ÉÌÒµ×ªÔØÇëÁªÏµ¹Ù·½ÊÚÈ¨£¬·ÇÉÌÒµ×ªÔØÇë×¢Ã÷³ö´¦¡£
+//æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+//é“¾æŽ¥ï¼šhttps ://leetcode-cn.com/problems/remove-duplicates-from-sorted-list
+//è‘—ä½œæƒå½’é¢†æ‰£ç½‘ç»œæ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»å®˜æ–¹æŽˆæƒï¼Œéžå•†ä¸šè½¬è½½è¯·æ³¨æ˜Žå‡ºå¤„ã€‚
 
 
 struct ListNode83 {
@@ -18,7 +18,7 @@ struct ListNode83 {
 };
 
 
-//µ¥Ö¸Õë±éÀúÁ´±í¡£Èôµ±Ç°Ö¸ÕëµÄºó¼Ì½ÚµãÓëµ±Ç°Ö¸ÕëµÄÖµÏàÍ¬£¬Ôò³ÖÐøÉ¾³ýµ±Ç°Ö¸ÕëµÄºó¼Ì½Úµã¡£
+//å•æŒ‡é’ˆéåŽ†é“¾è¡¨ã€‚è‹¥å½“å‰æŒ‡é’ˆçš„åŽç»§èŠ‚ç‚¹ä¸Žå½“å‰æŒ‡é’ˆçš„å€¼ç›¸åŒï¼Œåˆ™æŒç»­åˆ é™¤å½“å‰æŒ‡é’ˆçš„åŽç»§èŠ‚ç‚¹ã€‚
 ListNode83* deleteDuplicates(ListNode83* head)
 {
 	if (head == nullptr)
@@ -52,7 +52,7 @@ int main83()
 	//head->next->next->next->next = new ListNode83(3);
 	//head->next->next->next->next->next = new ListNode83(3);
 	ListNode83* ret = deleteDuplicates(head);
-	cout << "main£ºret = ";
+	cout << "mainï¼šret = ";
 	while (ret != nullptr)
 	{
 		cout << ret->val << ",";

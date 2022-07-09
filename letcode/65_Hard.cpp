@@ -1,55 +1,55 @@
-#include<iostream>
-#include<string>
-#include<stdlib.h>
+ï»¿#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <cmath>
 
 using namespace std;
 
-//ÓÐÐ§Êý×Ö£¨°´Ë³Ðò£©¿ÉÒÔ·Ö³ÉÒÔÏÂ¼¸¸ö²¿·Ö£º
+//æœ‰æ•ˆæ•°å­—ï¼ˆæŒ‰é¡ºåºï¼‰å¯ä»¥åˆ†æˆä»¥ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
 //
-//	1.Ò»¸ö Ð¡Êý »òÕß ÕûÊý
-//	2.£¨¿ÉÑ¡£©Ò»¸ö 'e' »ò 'E' £¬ºóÃæ¸ú×ÅÒ»¸ö ÕûÊý
+//	1.ä¸€ä¸ª å°æ•° æˆ–è€… æ•´æ•°
+//	2.ï¼ˆå¯é€‰ï¼‰ä¸€ä¸ª 'e' æˆ– 'E' ï¼ŒåŽé¢è·Ÿç€ä¸€ä¸ª æ•´æ•°
 //
-//Ð¡Êý£¨°´Ë³Ðò£©¿ÉÒÔ·Ö³ÉÒÔÏÂ¼¸¸ö²¿·Ö£º
+//å°æ•°ï¼ˆæŒ‰é¡ºåºï¼‰å¯ä»¥åˆ†æˆä»¥ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
 //
-//	1.£¨¿ÉÑ¡£©Ò»¸ö·ûºÅ×Ö·û£¨'+' »ò '-'£©
-//	2.ÏÂÊö¸ñÊ½Ö®Ò»£º
-//		1.ÖÁÉÙÒ»Î»Êý×Ö£¬ºóÃæ¸ú×ÅÒ»¸öµã '.'
-//		2.ÖÁÉÙÒ»Î»Êý×Ö£¬ºóÃæ¸ú×ÅÒ»¸öµã '.' £¬ºóÃæÔÙ¸ú×ÅÖÁÉÙÒ»Î»Êý×Ö
-//		3.Ò»¸öµã '.' £¬ºóÃæ¸ú×ÅÖÁÉÙÒ»Î»Êý×Ö
+//	1.ï¼ˆå¯é€‰ï¼‰ä¸€ä¸ªç¬¦å·å­—ç¬¦ï¼ˆ'+' æˆ– '-'ï¼‰
+//	2.ä¸‹è¿°æ ¼å¼ä¹‹ä¸€ï¼š
+//		1.è‡³å°‘ä¸€ä½æ•°å­—ï¼ŒåŽé¢è·Ÿç€ä¸€ä¸ªç‚¹ '.'
+//		2.è‡³å°‘ä¸€ä½æ•°å­—ï¼ŒåŽé¢è·Ÿç€ä¸€ä¸ªç‚¹ '.' ï¼ŒåŽé¢å†è·Ÿç€è‡³å°‘ä¸€ä½æ•°å­—
+//		3.ä¸€ä¸ªç‚¹ '.' ï¼ŒåŽé¢è·Ÿç€è‡³å°‘ä¸€ä½æ•°å­—
 //
-//ÕûÊý£¨°´Ë³Ðò£©¿ÉÒÔ·Ö³ÉÒÔÏÂ¼¸¸ö²¿·Ö£º
+//æ•´æ•°ï¼ˆæŒ‰é¡ºåºï¼‰å¯ä»¥åˆ†æˆä»¥ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
 //
-//	1.£¨¿ÉÑ¡£©Ò»¸ö·ûºÅ×Ö·û£¨'+' »ò '-'£©
-//	2.ÖÁÉÙÒ»Î»Êý×Ö
+//	1.ï¼ˆå¯é€‰ï¼‰ä¸€ä¸ªç¬¦å·å­—ç¬¦ï¼ˆ'+' æˆ– '-'ï¼‰
+//	2.è‡³å°‘ä¸€ä½æ•°å­—
 //
 //
-//ÌáÊ¾£º
+//æç¤ºï¼š
 //
 //	1 <= s.length <= 20
-//	s ½öº¬Ó¢ÎÄ×ÖÄ¸£¨´óÐ´ºÍÐ¡Ð´£©£¬Êý×Ö£¨0 - 9£©£¬¼ÓºÅ '+' £¬¼õºÅ '-' £¬»òÕßµã '.' ¡£
+//	s ä»…å«è‹±æ–‡å­—æ¯ï¼ˆå¤§å†™å’Œå°å†™ï¼‰ï¼Œæ•°å­—ï¼ˆ0 - 9ï¼‰ï¼ŒåŠ å· '+' ï¼Œå‡å· '-' ï¼Œæˆ–è€…ç‚¹ '.' ã€‚
 //
-//À´Ô´£ºÁ¦¿Û£¨LeetCode£©
-//Á´½Ó£ºhttps ://leetcode-cn.com/problems/valid-number
-//Öø×÷È¨¹éÁì¿ÛÍøÂçËùÓÐ¡£ÉÌÒµ×ªÔØÇëÁªÏµ¹Ù·½ÊÚÈ¨£¬·ÇÉÌÒµ×ªÔØÇë×¢Ã÷³ö´¦¡£
+//æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+//é“¾æŽ¥ï¼šhttps ://leetcode-cn.com/problems/valid-number
+//è‘—ä½œæƒå½’é¢†æ‰£ç½‘ç»œæ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»å®˜æ–¹æŽˆæƒï¼Œéžå•†ä¸šè½¬è½½è¯·æ³¨æ˜Žå‡ºå¤„ã€‚
 
-
-//±©Á¦½â·¨£¬Ê¹ÓÃ strtof() ¿âº¯Êý¡£
+//æš´åŠ›è§£æ³•ï¼Œä½¿ç”¨ strtof() åº“å‡½æ•°ã€‚
 bool isNumber(string s)
 {
 	char *pEnd;
 	float f = strtof(s.c_str(), &pEnd);
 
-	//´¦ÀíÌØÊâ×Ö·ûÊäÈë
+	//å¤„ç†ç‰¹æ®Šå­—ç¬¦è¾“å…¥
 	if (isnan(f))
 		return false;
 	if (isinf(f))
 	{
 		if (s[0] == '+' || s[0] == '-')
 		{
-			if ((s[1]<'0' || s[1]>'9') && (s[1] != '.'))
+			if ((s[1] < '0' || s[1] > '9') && (s[1] != '.'))
 				return false;
 		}
-		else if ((s[0]<'0' || s[0]>'9') && (s[0] != '.'))
+		else if ((s[0] < '0' || s[0] > '9') && (s[0] != '.'))
 			return false;
 	}
 
@@ -58,12 +58,11 @@ bool isNumber(string s)
 	return true;
 }
 
-
-int main65()
+int main()
 {
-	string test = "+Inf";
+	// string test = "+Inf";
+	string test = "3.13";
 	bool ret = isNumber(test);
-	cout << "main£ºret = " << ret << endl;
+	cout << "mainï¼šret = " << ret << endl;
 	return 0;
 }
-

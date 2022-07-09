@@ -1,32 +1,32 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<string>
 #include<vector>
 #include<algorithm>
 
 using namespace std;
 
-//¸ø¶¨Ò»¸ö×Ö·û´® s £¬ÕÒµ½ÆäÖĞ×î³¤µÄ»ØÎÄ×ÓĞòÁĞ£¬²¢·µ»Ø¸ÃĞòÁĞµÄ³¤¶È¡£¿ÉÒÔ¼ÙÉè s µÄ×î´ó³¤¶ÈÎª 1000 ¡£
+//ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸² s ï¼Œæ‰¾åˆ°å…¶ä¸­æœ€é•¿çš„å›æ–‡å­åºåˆ—ï¼Œå¹¶è¿”å›è¯¥åºåˆ—çš„é•¿åº¦ã€‚å¯ä»¥å‡è®¾ s çš„æœ€å¤§é•¿åº¦ä¸º 1000 ã€‚
 //
 //
-//ÌáÊ¾£º
+//æç¤ºï¼š
 //
 //	1 <= s.length <= 1000
-//	s Ö»°üº¬Ğ¡Ğ´Ó¢ÎÄ×ÖÄ¸
+//	s åªåŒ…å«å°å†™è‹±æ–‡å­—æ¯
 //
-//À´Ô´£ºÁ¦¿Û£¨LeetCode£©
-//Á´½Ó£ºhttps ://leetcode-cn.com/problems/longest-palindromic-subsequence
-//Öø×÷È¨¹éÁì¿ÛÍøÂçËùÓĞ¡£ÉÌÒµ×ªÔØÇëÁªÏµ¹Ù·½ÊÚÈ¨£¬·ÇÉÌÒµ×ªÔØÇë×¢Ã÷³ö´¦¡£
+//æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+//é“¾æ¥ï¼šhttps ://leetcode-cn.com/problems/longest-palindromic-subsequence
+//è‘—ä½œæƒå½’é¢†æ‰£ç½‘ç»œæ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»å®˜æ–¹æˆæƒï¼Œéå•†ä¸šè½¬è½½è¯·æ³¨æ˜å‡ºå¤„ã€‚
 
 
-//¶¯Ì¬¹æ»®¡£¼ÆËãÒ»¸öÊı×é£ºdp[i][j] ±íÊ¾×Ó´® [i,j] ÉÏµÄ×î³¤»ØÎÄ×ÓĞòÁĞµÄ³¤¶È¡£
-//×´Ì¬×ªÒÆº¯Êı£ºj != i + 1 Ê±£¬s[i] == s[j] Ê±£¬dp[i][j] = dp[i + 1][j - 1] + 2 £¬s[i] != s[j] Ê±£¬dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])£»j == i + 1 Ê±£¬dp[i][j] = s[i] == s[j] ? 2 : 1 ¡£
-//±ß½çÌõ¼ş£ºdp[i][i] = 1
-//×îÓÅ½â£ºdp[0][n-1] µÄÖµ
+//åŠ¨æ€è§„åˆ’ã€‚è®¡ç®—ä¸€ä¸ªæ•°ç»„ï¼šdp[i][j] è¡¨ç¤ºå­ä¸² [i,j] ä¸Šçš„æœ€é•¿å›æ–‡å­åºåˆ—çš„é•¿åº¦ã€‚
+//çŠ¶æ€è½¬ç§»å‡½æ•°ï¼šj != i + 1 æ—¶ï¼Œs[i] == s[j] æ—¶ï¼Œdp[i][j] = dp[i + 1][j - 1] + 2 ï¼Œs[i] != s[j] æ—¶ï¼Œdp[i][j] = max(dp[i][j - 1], dp[i + 1][j])ï¼›j == i + 1 æ—¶ï¼Œdp[i][j] = s[i] == s[j] ? 2 : 1 ã€‚
+//è¾¹ç•Œæ¡ä»¶ï¼šdp[i][i] = 1
+//æœ€ä¼˜è§£ï¼šdp[0][n-1] çš„å€¼
 int longestPalindromeSubseq(string s)
 {
 	int n = s.size();
-	vector<vector<int>> dp(n, vector<int>(n)); // dp ¾ØÕóµÄÃ¿ÁĞ´æ´¢ÎªÒ»¸öÊı×é
-	//ÁĞÓÅÏÈ±éÀú
+	vector<vector<int>> dp(n, vector<int>(n)); // dp çŸ©é˜µçš„æ¯åˆ—å­˜å‚¨ä¸ºä¸€ä¸ªæ•°ç»„
+	//åˆ—ä¼˜å…ˆéå†
 	for (int j = 0; j < n; j++)
 	{
 		for (int i = j; i >=0; i--)
@@ -56,6 +56,6 @@ int main516()
 	string test = "abxyxdby";
 	//string test = "bb";
 	int ret = longestPalindromeSubseq(test);
-	cout << "main£ºret = " << ret << endl;
+	cout << "mainï¼šret = " << ret << endl;
 	return 0;
 }

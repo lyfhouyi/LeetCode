@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<vector>
 #include<map>
 #include<set>
@@ -7,44 +7,44 @@
 
 using namespace std;
 
-//ÓĞ n ¸ö³ÇÊĞ£¬ÆäÖĞÒ»Ğ©±Ë´ËÏàÁ¬£¬ÁíÒ»Ğ©Ã»ÓĞÏàÁ¬¡£Èç¹û³ÇÊĞ a Óë³ÇÊĞ b Ö±½ÓÏàÁ¬£¬ÇÒ³ÇÊĞ b Óë³ÇÊĞ c Ö±½ÓÏàÁ¬£¬ÄÇÃ´³ÇÊĞ a Óë³ÇÊĞ c ¼ä½ÓÏàÁ¬¡£
+//æœ‰ n ä¸ªåŸå¸‚ï¼Œå…¶ä¸­ä¸€äº›å½¼æ­¤ç›¸è¿ï¼Œå¦ä¸€äº›æ²¡æœ‰ç›¸è¿ã€‚å¦‚æœåŸå¸‚ a ä¸åŸå¸‚ b ç›´æ¥ç›¸è¿ï¼Œä¸”åŸå¸‚ b ä¸åŸå¸‚ c ç›´æ¥ç›¸è¿ï¼Œé‚£ä¹ˆåŸå¸‚ a ä¸åŸå¸‚ c é—´æ¥ç›¸è¿ã€‚
 //
-//Ê¡·İ ÊÇÒ»×éÖ±½Ó»ò¼ä½ÓÏàÁ¬µÄ³ÇÊĞ£¬×éÄÚ²»º¬ÆäËûÃ»ÓĞÏàÁ¬µÄ³ÇÊĞ¡£
+//çœä»½ æ˜¯ä¸€ç»„ç›´æ¥æˆ–é—´æ¥ç›¸è¿çš„åŸå¸‚ï¼Œç»„å†…ä¸å«å…¶ä»–æ²¡æœ‰ç›¸è¿çš„åŸå¸‚ã€‚
 //
-//¸øÄãÒ»¸ö n x n µÄ¾ØÕó isConnected £¬ÆäÖĞ isConnected[i][j] = 1 ±íÊ¾µÚ i ¸ö³ÇÊĞºÍµÚ j ¸ö³ÇÊĞÖ±½ÓÏàÁ¬£¬¶ø isConnected[i][j] = 0 ±íÊ¾¶şÕß²»Ö±½ÓÏàÁ¬¡£
+//ç»™ä½ ä¸€ä¸ª n x n çš„çŸ©é˜µ isConnected ï¼Œå…¶ä¸­ isConnected[i][j] = 1 è¡¨ç¤ºç¬¬ i ä¸ªåŸå¸‚å’Œç¬¬ j ä¸ªåŸå¸‚ç›´æ¥ç›¸è¿ï¼Œè€Œ isConnected[i][j] = 0 è¡¨ç¤ºäºŒè€…ä¸ç›´æ¥ç›¸è¿ã€‚
 //
-//·µ»Ø¾ØÕóÖĞ Ê¡·İ µÄÊıÁ¿¡£
+//è¿”å›çŸ©é˜µä¸­ çœä»½ çš„æ•°é‡ã€‚
 //
-//ÌáÊ¾£º
+//æç¤ºï¼š
 //
 //	1 <= n <= 200
 //	n == isConnected.length
 //	n == isConnected[i].length
-//	isConnected[i][j] Îª 1 »ò 0
+//	isConnected[i][j] ä¸º 1 æˆ– 0
 //	isConnected[i][i] == 1
 //	isConnected[i][j] == isConnected[j][i]
 //
-//À´Ô´£ºÁ¦¿Û£¨LeetCode£©
-//Á´½Ó£ºhttps ://leetcode-cn.com/problems/number-of-provinces
-//Öø×÷È¨¹éÁì¿ÛÍøÂçËùÓĞ¡£ÉÌÒµ×ªÔØÇëÁªÏµ¹Ù·½ÊÚÈ¨£¬·ÇÉÌÒµ×ªÔØÇë×¢Ã÷³ö´¦¡£
+//æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+//é“¾æ¥ï¼šhttps ://leetcode-cn.com/problems/number-of-provinces
+//è‘—ä½œæƒå½’é¢†æ‰£ç½‘ç»œæ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»å®˜æ–¹æˆæƒï¼Œéå•†ä¸šè½¬è½½è¯·æ³¨æ˜å‡ºå¤„ã€‚
 
 
 class Vertex
 {
 public:
-	Vertex(int no) :no(no), degree(0), connectivityVertex(set<Vertex*>()) {} //³õÊ¼»¯Ê±£¬¶¥µãºÍ×Ô¼ºÊÇ²»Á¬Í¨µÄ
+	Vertex(int no) :no(no), degree(0), connectivityVertex(set<Vertex*>()) {} //åˆå§‹åŒ–æ—¶ï¼Œé¡¶ç‚¹å’Œè‡ªå·±æ˜¯ä¸è¿é€šçš„
 	int no;
 	int degree;
-	set<Vertex*>connectivityVertex; //Á¬½Ó¶¥µã¼¯
-	void addEdge(Vertex* connectVertex) //Ôö¼ÓÒ»Ìõ±ß
+	set<Vertex*>connectivityVertex; //è¿æ¥é¡¶ç‚¹é›†
+	void addEdge(Vertex* connectVertex) //å¢åŠ ä¸€æ¡è¾¹
 	{
 		pair<set<Vertex*>::iterator, bool> ret = connectivityVertex.insert(connectVertex);
 		if (false == ret.second)
 			return;
-		cout << "addEdge£ºÔö¼ÓÒ»Ìõ±ß£º" << this->no << "--" << connectVertex->no << endl;
-		connectVertex->addEdge(this); //Ôö¼Ó·´·½ÏòµÄ±ß
+		cout << "addEdgeï¼šå¢åŠ ä¸€æ¡è¾¹ï¼š" << this->no << "--" << connectVertex->no << endl;
+		connectVertex->addEdge(this); //å¢åŠ åæ–¹å‘çš„è¾¹
 
-		//Ôö¼ÓÏà¹Ø±ß
+		//å¢åŠ ç›¸å…³è¾¹
 		for (set<Vertex*>::iterator it = connectVertex->connectivityVertex.begin(); it != connectVertex->connectivityVertex.end(); it++)
 			this->addEdge(*it);
 		degree = connectivityVertex.size();
@@ -52,21 +52,21 @@ public:
 };
 
 
-//½â·¨Ò»£ºÎŞÏòÍ¼¡£½«³ÇÊĞÉèÎª¶¥µã£¬³ÇÊĞ¼äµÄÁ¬Í¨¹ØÏµÉèÎª±ß¡£Ê×ÏÈ¹¹Ôì³ÇÊĞ¼¯£¬Ëæºó±éÀú isConnected Êı×é£¬¹¹Ôì¹ØÏµÍ¼£¬Ã¿²åÈëÒ»Ìõ±ß¶¼ÒªÈ·¶¨¸Ã¶¥µãµÄËùÓĞ±ß£»¶¥µãµÄ¶È·´Ó³ÁËÓë¸Ã³ÇÊĞÁ¬Í¨µÄ³ÇÊĞµÄÊıÁ¿£¬Í¨¹ı¹¹Ôì³ÇÊĞÊıÁ¿Êı×é¼ÆËãÊ¡·İÊıÁ¿¡£
+//è§£æ³•ä¸€ï¼šæ— å‘å›¾ã€‚å°†åŸå¸‚è®¾ä¸ºé¡¶ç‚¹ï¼ŒåŸå¸‚é—´çš„è¿é€šå…³ç³»è®¾ä¸ºè¾¹ã€‚é¦–å…ˆæ„é€ åŸå¸‚é›†ï¼Œéšåéå† isConnected æ•°ç»„ï¼Œæ„é€ å…³ç³»å›¾ï¼Œæ¯æ’å…¥ä¸€æ¡è¾¹éƒ½è¦ç¡®å®šè¯¥é¡¶ç‚¹çš„æ‰€æœ‰è¾¹ï¼›é¡¶ç‚¹çš„åº¦åæ˜ äº†ä¸è¯¥åŸå¸‚è¿é€šçš„åŸå¸‚çš„æ•°é‡ï¼Œé€šè¿‡æ„é€ åŸå¸‚æ•°é‡æ•°ç»„è®¡ç®—çœä»½æ•°é‡ã€‚
 int findCircleNum(vector<vector<int>>& isConnected) 
 {
-	map<int, Vertex*>vertexs; //¶¥µã¼¯
-	int size = isConnected.size(); //³ÇÊĞ×ÜÊı
+	map<int, Vertex*>vertexs; //é¡¶ç‚¹é›†
+	int size = isConnected.size(); //åŸå¸‚æ€»æ•°
 	int i;
 
-	//¹¹Ôì¶¥µã¼¯
+	//æ„é€ é¡¶ç‚¹é›†
 	for (i = 0; i < size; i++)
 	{
 		if (vertexs.end() == vertexs.find(i))
 			vertexs[i] = new Vertex(i);
 	}
 
-	//¹¹Ôì¹ØÏµÍ¼
+	//æ„é€ å…³ç³»å›¾
 	for (i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
@@ -76,8 +76,8 @@ int findCircleNum(vector<vector<int>>& isConnected)
 		}
 	}
 
-	//¼ÆËãÊ¡·İÊıÁ¿
-	vector<int>cityCnt(size); //±£´æÃ¿Ò»¸ö³ÇÊĞËùÔÚµÄÊ¡·İµÄ³ÇÊĞÊıÁ¿
+	//è®¡ç®—çœä»½æ•°é‡
+	vector<int>cityCnt(size); //ä¿å­˜æ¯ä¸€ä¸ªåŸå¸‚æ‰€åœ¨çš„çœä»½çš„åŸå¸‚æ•°é‡
 	int provinceCnt = 0;
 	for (i=0;i<size;i++)
 	{
@@ -104,7 +104,7 @@ void dfs(const vector<vector<int>>& isConnected, vector<bool>& isVisited, int st
 }
 
 
-//½â·¨¶ş£ºÉî¶ÈÓÅÏÈËÑË÷
+//è§£æ³•äºŒï¼šæ·±åº¦ä¼˜å…ˆæœç´¢
 //int findCircleNum(vector<vector<int>>& isConnected)
 //{
 //	int provinceCnt = 0;
@@ -121,7 +121,7 @@ void dfs(const vector<vector<int>>& isConnected, vector<bool>& isVisited, int st
 //}
 
 
-//½â·¨Èı£º¹ã¶ÈÓÅÏÈËÑË÷
+//è§£æ³•ä¸‰ï¼šå¹¿åº¦ä¼˜å…ˆæœç´¢
 //int findCircleNum(vector<vector<int>>& isConnected)
 //{
 //	int provinceCnt = 0;
@@ -156,6 +156,6 @@ int main547()
 	vector<vector<int>> test{ {1, 0, 0, 1},{0, 1, 1, 0},{0, 1, 1,1},{1, 0, 1, 1} };
 	//vector<vector<int>> test{ {1, 0, 0},{0, 1, 0},{0, 0, 1} };
 	int ret = findCircleNum(test);
-	cout << "main£ºret = " << ret << endl;
+	cout << "mainï¼šret = " << ret << endl;
 	return 0;
 }

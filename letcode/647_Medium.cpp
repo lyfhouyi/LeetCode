@@ -1,4 +1,4 @@
-#include<iostream>
+﻿#include<iostream>
 #include<vector>
 #include<string>
 #include<algorithm>
@@ -6,21 +6,21 @@
 using namespace std;
 
 
-//����һ���ַ�������������Ǽ�������ַ������ж��ٸ������Ӵ���
+//给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。
 //
-//���в�ͬ��ʼλ�û����λ�õ��Ӵ�����ʹ������ͬ���ַ���ɣ�Ҳ�ᱻ������ͬ���Ӵ���
+//具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
 //
 //
-//��ʾ��
+//提示：
 //
-//	������ַ������Ȳ��ᳬ�� 1000 ��
+//	输入的字符串长度不会超过 1000 。
 //
-//��Դ�����ۣ�LeetCode��
-//���ӣ�https ://leetcode-cn.com/problems/palindromic-substrings
-//����Ȩ������������С���ҵת������ϵ�ٷ���Ȩ������ҵת����ע��������
+//来源：力扣（LeetCode）
+//链接：https ://leetcode-cn.com/problems/palindromic-substrings
+//著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-////�ⷨһ����ָ��������顣���һ����Ӵ��ĺ����ǣ����û����ַ�����ԳƵ����ʣ���ԭ�ַ����ĸ��ַ�������Ϊ�Ӵ��ĶԳ��ᣨ�������ģ���ÿ���趨�Գ���󣬲�����չ�Ӵ����ҵ������Ļ����Ӵ���ʱ�临�Ӷ� O(n^2)���ռ临�Ӷ� O(1)��
+////解法一：单指针遍历数组。查找回文子串的核心是：利用回文字符串轴对称的性质，将原字符串的各字符依次作为子串的对称轴（回文中心）；每次设定对称轴后，不断扩展子串以找到更长的回文子串。时间复杂度 O(n^2)，空间复杂度 O(1)。
 //int countSubstrings(string s)
 //{
 //	int palindromeCnt = 0;
@@ -29,20 +29,20 @@ using namespace std;
 //	for (int i = 0; i < sSize; i++)
 //	{
 //		j = 0;
-//		while (i - j >= 0 && i + j < sSize && s[i - j] == s[i + j]) //�ҵ��� s[i] Ϊ���ĵĻ����Ӵ�
+//		while (i - j >= 0 && i + j < sSize && s[i - j] == s[i + j]) //找到以 s[i] 为中心的回文子串
 //		{
 //			palindromeCnt++;
-//			cout << "countSubstrings���ҵ������ִ�  " << string(s.begin() + i - j, s.begin() + i + j + 1) << endl;
+//			cout << "countSubstrings：找到回文字串  " << string(s.begin() + i - j, s.begin() + i + j + 1) << endl;
 //			j++;
 //		}
 //
-//		if (s[i] == s[i + 1]) //�ҵ��� s[i] s[i+1] Ϊ���ĵĻ����ִ�
+//		if (s[i] == s[i + 1]) //找到以 s[i] s[i+1] 为中心的回文字串
 //		{
 //			j = 0;
-//			while (i - j >= 0 && i + j + 1 < sSize && s[i - j] == s[i + j + 1]) //�ҵ��� s[i]s[i+1] Ϊ���ĵĻ����Ӵ�
+//			while (i - j >= 0 && i + j + 1 < sSize && s[i - j] == s[i + j + 1]) //找到以 s[i]s[i+1] 为中心的回文子串
 //			{
 //				palindromeCnt++;
-//				cout << "countSubstrings���ҵ������ִ�  " << string(s.begin() + i - j, s.begin() + i + j + 1 + 1) << endl;
+//				cout << "countSubstrings：找到回文字串  " << string(s.begin() + i - j, s.begin() + i + j + 1 + 1) << endl;
 //				j++;
 //			}
 //		}
@@ -53,10 +53,10 @@ using namespace std;
 //}
 
 
-//�ⷨ�������� Manacher �㷨�����������İ뾶�������ÿ����ѡ�������ĵ���չ�������Կռ任ʱ�䣬ʱ�临�Ӷ� O(n)���ռ临�Ӷ� O(n)��
+//解法二：基于 Manacher 算法。利用最大回文半径数组减少每个候选回文中心的扩展次数。以空间换时间，时间复杂度 O(n)，空间复杂度 O(n)。
 int countSubstrings(string s)
 {
-	//��ʼ��ĸ��
+	//初始化母串
 	string Ms = "$#";
 	for (string::iterator it = s.begin(); it != s.end(); it++)
 	{
@@ -68,11 +68,11 @@ int countSubstrings(string s)
 	//cout << Ms << endl;
 
 	int MsSize = Ms.size();
-	vector<int> rMaxArray(MsSize, 1); //��λ�������İ뾶��ʼ��Ϊ 1
+	vector<int> rMaxArray(MsSize, 1); //各位置最大回文半径初始化为 1
 
 	int r = 0;
-	int rMax = 1; //�������Ҷ˵�
-	int rCentre = 1; //�������Ҷ˵��Ӧ�Ļ�������
+	int rMax = 1; //最大回文右端点
+	int rCentre = 1; //最大回文右端点对应的回文中心
 	int j = 0;
 	int palindromeCnt = 0;
 	int cnt = 0;
@@ -83,13 +83,13 @@ int countSubstrings(string s)
 		while (Ms[i - r] == Ms[i + r])
 		{
 			if (1 == r % 2)
-				cout << "countSubstrings���ҵ������Ӵ�  " << ++cnt << "  " << string(Ms.begin() + i - r, Ms.begin() + i + r + 1) << endl;
+				cout << "countSubstrings：找到回文子串  " << ++cnt << "  " << string(Ms.begin() + i - r, Ms.begin() + i + r + 1) << endl;
 			r++;
 		}
 		rMaxArray[i] = r;
 		rCentre = i + r - 1 > rMax ? i : rCentre;
 		rMax = i + r - 1 > rMax ? i + r - 1 : rMax;
-		palindromeCnt += r / 2; //�����İ뾶 - 1 = �û�������������Ӵ��ĳ��ȣ���������Ч�ַ�����
+		palindromeCnt += r / 2; //最大回文半径 - 1 = 该回文中心最长回文子串的长度（包含的有效字符数）
 	}
 	return palindromeCnt;
 }
@@ -99,6 +99,6 @@ int main647()
 {
 	string test = "dfghjkl";
 	int ret = countSubstrings(test);
-	cout << "main��ret = " << ret << endl;
+	cout << "main：ret = " << ret << endl;
 	return 0;
 }

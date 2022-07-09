@@ -1,19 +1,19 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<vector>
 #include<algorithm>
 
 using namespace std;
 
-//¸ø¶¨Ò»¸öÇø¼äµÄ¼¯ºÏ£¬ÕÒµ½ĞèÒªÒÆ³ıÇø¼äµÄ×îĞ¡ÊıÁ¿£¬Ê¹Ê£ÓàÇø¼ä»¥²»ÖØµş¡£
+//ç»™å®šä¸€ä¸ªåŒºé—´çš„é›†åˆï¼Œæ‰¾åˆ°éœ€è¦ç§»é™¤åŒºé—´çš„æœ€å°æ•°é‡ï¼Œä½¿å‰©ä½™åŒºé—´äº’ä¸é‡å ã€‚
 //
-//×¢Òâ :
+//æ³¨æ„ :
 //
-//1.¿ÉÒÔÈÏÎªÇø¼äµÄÖÕµã×ÜÊÇ´óÓÚËüµÄÆğµã¡£
-//2.Çø¼ä[1, 2] ºÍ[2, 3] µÄ±ß½çÏà»¥¡°½Ó´¥¡±£¬µ«Ã»ÓĞÏà»¥ÖØµş
+//1.å¯ä»¥è®¤ä¸ºåŒºé—´çš„ç»ˆç‚¹æ€»æ˜¯å¤§äºå®ƒçš„èµ·ç‚¹ã€‚
+//2.åŒºé—´[1, 2] å’Œ[2, 3] çš„è¾¹ç•Œç›¸äº’â€œæ¥è§¦â€ï¼Œä½†æ²¡æœ‰ç›¸äº’é‡å 
 
-//À´Ô´£ºÁ¦¿Û£¨LeetCode£©
-//Á´½Ó£ºhttps ://leetcode-cn.com/problems/non-overlapping-intervals
-//Öø×÷È¨¹éÁì¿ÛÍøÂçËùÓĞ¡£ÉÌÒµ×ªÔØÇëÁªÏµ¹Ù·½ÊÚÈ¨£¬·ÇÉÌÒµ×ªÔØÇë×¢Ã÷³ö´¦¡£
+//æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+//é“¾æ¥ï¼šhttps ://leetcode-cn.com/problems/non-overlapping-intervals
+//è‘—ä½œæƒå½’é¢†æ‰£ç½‘ç»œæ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»å®˜æ–¹æˆæƒï¼Œéå•†ä¸šè½¬è½½è¯·æ³¨æ˜å‡ºå¤„ã€‚
 
 
 bool smallInterval(vector<int>intervalA, vector<int>intervalB)
@@ -25,7 +25,7 @@ bool smallInterval(vector<int>intervalA, vector<int>intervalB)
 	return false;
 }
 
-//ÅĞ¶Ï A , B Çø¼äÄÄ¸öÓ¦¸Ã±»ÒÆ³ı£¨ A ·µ»Ø 1£¬B ·µ»Ø 2£¬ÎŞĞèÒÆ³ı·µ»Ø 0 £©
+//åˆ¤æ–­ A , B åŒºé—´å“ªä¸ªåº”è¯¥è¢«ç§»é™¤ï¼ˆ A è¿”å› 1ï¼ŒB è¿”å› 2ï¼Œæ— éœ€ç§»é™¤è¿”å› 0 ï¼‰
 int which2erase(vector<int>intervalA, vector<int>intervalB)
 {
 	if (intervalB[0] >= intervalA[1])
@@ -36,7 +36,7 @@ int which2erase(vector<int>intervalA, vector<int>intervalB)
 }
 
 
-//Ì°ĞÄËã·¨£º½«Çø¼äÅÅĞòºó£¬ÒÀ´Î±È½ÏÁ½¸öÏàÁÚÇø¼ä£¬²½·ùÎª1£¬Ã¿´Î±È½Ï¶¼¾ö¶¨±È½ÏµÄÁ½¸öÇø¼äÖĞÄÄ¸öÓ¦¸Ã±»ÒÆ³ı»òÕß¶¼ÎŞĞèÒÆ³ı¡£
+//è´ªå¿ƒç®—æ³•ï¼šå°†åŒºé—´æ’åºåï¼Œä¾æ¬¡æ¯”è¾ƒä¸¤ä¸ªç›¸é‚»åŒºé—´ï¼Œæ­¥å¹…ä¸º1ï¼Œæ¯æ¬¡æ¯”è¾ƒéƒ½å†³å®šæ¯”è¾ƒçš„ä¸¤ä¸ªåŒºé—´ä¸­å“ªä¸ªåº”è¯¥è¢«ç§»é™¤æˆ–è€…éƒ½æ— éœ€ç§»é™¤ã€‚
 int eraseOverlapIntervals(vector<vector<int>>& intervals)
 {
 	if (0 == intervals.size())
@@ -53,14 +53,14 @@ int eraseOverlapIntervals(vector<vector<int>>& intervals)
 		{
 		case 2:
 		{
-			cout << "ÒÆ³ıÇø¼ä£º[" << (*it2)[0] << "," << (*it2)[1] << "]" << endl;
+			cout << "ç§»é™¤åŒºé—´ï¼š[" << (*it2)[0] << "," << (*it2)[1] << "]" << endl;
 			eraseCnt++;
 			*it2 = *it1;
 			break;
 		}
 		case 1:
 		{
-			cout << "ÒÆ³ıÇø¼ä£º[" << (*it1)[0] << "," << (*it1)[1] << "]" << endl;
+			cout << "ç§»é™¤åŒºé—´ï¼š[" << (*it1)[0] << "," << (*it1)[1] << "]" << endl;
 			eraseCnt++;
 			break;
 		}
@@ -79,6 +79,6 @@ int main435()
 	//vector<vector<int>>test = { {1,2},{2,3},{3,4},{1,3} };
 	vector<vector<int>>test = {  };
 	int ret = eraseOverlapIntervals(test);
-	cout << "main£ºret=" << ret << endl;
+	cout << "mainï¼šret=" << ret << endl;
 	return 0;
 }

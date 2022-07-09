@@ -1,11 +1,11 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<string>
 #include<vector>
 
 using namespace std;
 
-//ÕûĞĞÊäÈë£¬¿Õ¸ñ¼ä¸ô£¬È¡Ò»ĞĞ
-int main()
+//æ•´è¡Œè¾“å…¥ï¼Œç©ºæ ¼é—´éš”ï¼Œå–ä¸€è¡Œ
+int mainIo()
 {
 	vector<string> vstr;
 	string str;
