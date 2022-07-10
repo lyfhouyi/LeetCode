@@ -42,7 +42,7 @@ int main867()
 	//vector<vector<int>> test = { {1,2,3},{4,5,6} };
 	vector<vector<int>> test = { {1,3,1},{1,5,1},{4,2,1} };
 	vector<vector<int>> ret = transpose(test);
-	cout << "main：ret =" << endl;
+	cout << "main：ret = " << endl;
 	for (vector<vector<int>>::iterator it = ret.begin(); it != ret.end(); it++)
 	{
 		for (vector<int>::iterator it2 = it->begin(); it2 != it->end(); it2++)
